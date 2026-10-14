@@ -679,7 +679,7 @@ function stateView(){
   const box=(h,t)=>`<div class="ldg"><div style="max-width:46ch"><p class="eyebrow">Centro de Avances</p><h1 style="font-size:clamp(24px,4vw,38px)">${h}</h1><p class="lead" style="margin:0 auto">${t}</p></div></div>`;
   if(dbState==="cargando")return `<div class="ldg"><div><div class="sp"></div>Cargando los avances…</div></div>`;
   if(dbState==="nodb")return box("No se pudo abrir la base de datos","Abre este enlace con tu cuenta de Claude. Si ya lo hiciste, pide acceso a quien te lo compartió.");
-  if(dbState==="error")return box("No se pudieron leer los avances","Recarga la página en unos segundos. Si sigue igual, avisa a quien mantiene el tablero.");
+  if(dbState==="error")return box("No se pudieron leer los avances","Recarga la página en unos segundos. Si la abriste como archivo suelto en tu computador, ábrela desde su enlace: los datos viven en archivos junto a la página. Si sigue igual, avisa a quien mantiene el tablero.");
   if(!PERIODS.length)return box("Aún no hay períodos cargados","Cuando se cargue el primero con el skill «tablero-avances», aparecerá aquí con sus tareas, evidencias e historial.");
   return null;
 }
@@ -736,11 +736,21 @@ window.addEventListener("hashchange",()=>{const h=location.hash||"#resumen";if(h
 $("#persel").onchange=e=>{sel=e.target.value;applyData();render()};
 if(SNAPSHOT.length){PERIODS=SNAPSHOT.slice().sort(byDesde);dbState="ok";applyData()}
 render();
+/* Alojamiento propio (GitHub Pages): los datos son archivos junto a la página. data/index.json lista los períodos y cada uno
+   está en data/periodos/<id>.json. La página (HTML) no cambia: quien carga un período solo agrega su archivo. */
+async function cargarHospedado(){
+  const v="?v="+Date.now(),get=async u=>{const r=await fetch(u+v,{cache:"no-store"});if(!r.ok)throw new Error(u+" "+r.status);return r.json()};
+  try{
+    const idx=await get("data/index.json");
+    const docs=await Promise.all((idx.periodos||[]).map(id=>get("data/periodos/"+encodeURIComponent(id)+".json")));
+    PERIODS=docs.sort(byDesde);dbState="ok";applyData();render(true);
+  }catch(e){if(!SNAPSHOT.length){dbState="error"}render(true)}
+}
 /* La copia incluida se muestra al instante; la base de datos, si responde, aporta lo más reciente. */
 const fallback=()=>{if(!SNAPSHOT.length){dbState="nodb";render(true)}};
 (async()=>{
   try{
-    if(!window.claude||!window.claude.use){/* fuera de Claude (p. ej. GitHub Pages): solo la copia incluida */ if(!SNAPSHOT.length){PERIODS=[];dbState="ok";applyData();render(true)}return}
+    if(!window.claude||!window.claude.use){await cargarHospedado();return}
     const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
     try{EDITOR=user?await user.canEdit():false}catch(e){EDITOR=false}
     if(!db){fallback();render(true);return}
