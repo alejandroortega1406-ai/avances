@@ -725,8 +725,9 @@ function wire(m){
   const rv=m.querySelectorAll(".reveal:not(.in)");
   if(RM||!("IntersectionObserver" in window))rv.forEach(x=>x.classList.add("in"));
   else{const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target)}}),{threshold:.1});rv.forEach(x=>io.observe(x))}
-  m.querySelectorAll("[data-to]").forEach(el=>{const to=+el.dataset.to;if(RM){el.textContent=to;return}
-    const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/900);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(t0)});
+  /* El número real se escribe primero; la animación de conteo solo corre si el navegador la ejecuta (pestaña visible). */
+  m.querySelectorAll("[data-to]").forEach(el=>{const to=+el.dataset.to;el.textContent=to;if(RM)return;
+    let t0=null;requestAnimationFrame(function f(t){if(t0===null)t0=t;const k=Math.min(1,(t-t0)/900);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})});
   requestAnimationFrame(()=>requestAnimationFrame(()=>m.querySelectorAll(".ring .seg").forEach(s=>s.style.strokeDasharray=s.dataset.d)));
 }
 function rerender(){render(true)}
