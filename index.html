@@ -267,7 +267,6 @@ tr.click{cursor:pointer;transition:background .2s}tr.click:hover{background:var(
   .hero{grid-template-columns:1fr}.ringwrap{max-width:320px;margin:0 auto}
   .story{grid-template-columns:1fr 1fr}.story div:nth-child(2){border-right:0}.story div:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .kpis{grid-template-columns:1fr 1fr}
-  .split{grid-template-columns:1fr}.sw{position:static;flex-direction:row;overflow-x:auto}.sw button{min-width:200px}
 }
 @media (max-width:620px){.chip{display:none}.story,.kpis{grid-template-columns:1fr}.story div{border-right:0!important;border-bottom:1px solid var(--line)}.top{gap:10px}.brand span{display:none}.cards{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
@@ -391,6 +390,86 @@ tr.click{cursor:pointer;transition:background .2s}tr.click:hover{background:var(
 @media (max-width:620px){.cmp{grid-template-columns:1fr}.psel{max-width:150px;margin-left:auto}.top{flex-wrap:wrap;row-gap:6px;padding-block:10px}.top .sp{display:none}.tabs{order:3;width:100%;margin-left:0}.hc{padding:12px 14px}.hl{flex-direction:column;gap:8px}.lbc{max-height:100%}.lbb img{max-height:60vh}.lbb iframe{height:60vh}.kv,.facts{font-size:13px}.drawer{padding:20px 16px}.cta .btn{flex:1 1 140px;text-align:center}}
 @media (pointer:coarse){.dot{width:24px;height:24px}.day{min-width:54px}.tab{padding:10px 14px}.btn,.lk,.pchip{min-height:40px}.fm{padding:12px}}
 @media (max-width:380px){h1{font-size:30px}.ringc b{font-size:52px}.card{padding:18px}}
+/* pestañas que se noten: píldoras con borde y la activa con relleno de color y brillo */
+.tabs{gap:8px;margin-left:16px}
+.tab{display:flex;align-items:center;gap:8px;padding:9px 18px;font-size:15px;color:var(--text);border:1px solid var(--line2);border-radius:999px;background:rgba(255,255,255,.05)}
+.tab .ic{display:block;width:18px;height:18px}
+.tab:hover{border-color:var(--cyan);background:rgba(34,211,238,.1);color:#fff}
+.tab[aria-current="page"]{color:#04121c;border-color:transparent;background:linear-gradient(120deg,var(--cyan),var(--blue));box-shadow:0 0 0 1px rgba(34,211,238,.35),0 6px 24px rgba(34,211,238,.38)}
+.tab[aria-current="page"]::after{display:none}
+.tab[aria-current="page"] .ic{stroke:#04121c}
+.tab .lg{display:inline;border:0;background:none;padding:0;font-size:inherit;border-radius:0}
+@media(max-width:620px){.tabs{margin:0;gap:6px}.tab .lg{display:none}.tab{flex-direction:column;gap:3px;padding:8px 6px;font-size:12px;border-radius:14px}.tab .ic{width:20px;height:20px}.tab[aria-current="page"]{box-shadow:0 0 0 1px rgba(34,211,238,.35),0 4px 18px rgba(34,211,238,.35)}}
+/* resumen: texto corto de cada tarea, máximo 2 líneas */
+.pjx,.acb .hpc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* resumen desplegable */
+.acs{display:grid;gap:10px;margin-bottom:26px}
+.ac{border:1px solid var(--line);border-left:3px solid var(--pc);border-radius:16px;background:var(--panel);overflow:hidden;transition:border-color .2s,background .2s}
+.ac[open]{border-color:color-mix(in srgb,var(--pc) 55%,var(--line));background:linear-gradient(180deg,color-mix(in srgb,var(--pc) 7%,transparent),transparent 40%),var(--panel)}
+.ac summary{display:grid;grid-template-columns:minmax(0,1fr) auto 20px;gap:12px;align-items:center;padding:16px 18px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+.ac summary::-webkit-details-marker{display:none}
+.ac summary:hover{background:rgba(255,255,255,.03)}
+.acn{display:flex;align-items:center;gap:11px;min-width:0;font-family:var(--disp);font-size:clamp(16px,2vw,19px);font-weight:600;letter-spacing:-.01em}
+.acn i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--pc);box-shadow:0 0 12px var(--pc)}
+.acc{color:var(--muted);font-size:13px;white-space:nowrap}
+.acc b{color:var(--text);font-size:15px}
+.ac .chev{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.ac[open] .chev{transform:rotate(180deg);stroke:var(--text)}
+.acb{padding:2px 18px 16px}
+.acb .hpc{margin:0 0 12px}
+.acb .pjt{background:transparent}
+.acf{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:13px}
+.pjx b{color:var(--text);font-weight:600}
+.pjx.fal{color:var(--amber)}
+@media(max-width:620px){.ac summary{padding:14px}.acb{padding:2px 12px 14px}}
+/* proyectos: lateral */
+.split{grid-template-columns:300px minmax(0,1fr)}
+.swa{position:sticky;top:76px;align-self:start}
+.swh,.pickbtn,.swscrim{display:none}
+.sw{position:static}
+.sw button{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:center;padding:12px 14px}
+.swn{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--pc);border:1px solid color-mix(in srgb,var(--pc) 60%,transparent);background:color-mix(in srgb,var(--pc) 12%,transparent)}
+.sw button[aria-current="true"] .swn{background:var(--pc);color:#06101a}
+.swt b{display:block;font-weight:600;line-height:1.25}
+.swt small{display:block;margin-top:2px}
+.nxt{display:block;width:100%;margin-top:26px;text-align:left;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--text);transition:border-color .2s}
+.nxt small{display:block;margin-bottom:2px;color:var(--muted);font-size:12px}
+.nxt b{font-family:var(--disp);font-size:17px}
+.nxt:hover{border-color:var(--cyan)}
+@media(max-width:900px){
+ .split{display:block}
+ .pickbtn{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 18px;padding:12px 14px;border:1px solid var(--line2);border-radius:14px;background:rgba(10,17,32,.92);color:var(--text);text-align:left;font:inherit;position:sticky;top:64px;z-index:5;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+ .pickbtn span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+ .pickbtn small{color:var(--muted);font-size:12px}
+ .pickbtn svg{flex:none;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+ .swa{position:fixed;z-index:40;left:0;top:0;bottom:0;width:min(86vw,340px);padding:16px 14px calc(16px + env(safe-area-inset-bottom,0px));overflow:auto;background:rgba(6,10,19,.98);border-right:1px solid var(--line2);box-shadow:20px 0 60px rgba(0,0,0,.5);transform:translateX(-104%);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+ .split.pick .swa{transform:none}
+ .swh{display:flex;align-items:center;justify-content:space-between;margin:0 2px 12px;font-family:var(--disp);font-size:18px}
+ .swscrim{display:block;position:fixed;inset:0;z-index:39;background:rgba(2,5,10,.62);opacity:0;pointer-events:none;transition:opacity .25s}
+ .split.pick .swscrim{opacity:1;pointer-events:auto}
+}
+/* proyectos en lista continua */
+@property --glow{syntax:"<color>";inherits:true;initial-value:transparent}
+html{transition:--glow 1s ease}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(70vmax 46vmax at 88% -8%,color-mix(in srgb,var(--glow) 17%,transparent),transparent 70%),radial-gradient(52vmax 38vmax at -6% 108%,color-mix(in srgb,var(--glow) 11%,transparent),transparent 70%)}
+.pj2{margin:0 0 20px}
+.pj2+.pj2{padding-top:46px;position:relative}
+.pj2+.pj2::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--pc),transparent);opacity:.55}
+.pj2h{display:flex;align-items:center;gap:clamp(14px,2.4vw,26px);flex-wrap:wrap;margin:0 0 16px;padding:clamp(16px,2.4vw,24px) clamp(16px,2.6vw,28px);border:1px solid color-mix(in srgb,var(--pc) 45%,var(--line));border-radius:22px;background:linear-gradient(115deg,color-mix(in srgb,var(--pc) 24%,transparent),transparent 72%),var(--panel);overflow:hidden;position:relative}
+.pj2h::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--pc);box-shadow:0 0 22px var(--pc)}
+.pj2n{font-family:var(--disp);font-size:clamp(42px,6.4vw,68px);font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--pc);text-shadow:0 0 30px color-mix(in srgb,var(--pc) 55%,transparent)}
+.pj2t{flex:1 1 220px;min-width:0}
+.pj2t .eyebrow{margin:0 0 4px;color:var(--pc)}
+.pj2t h2{margin:0;font-size:clamp(24px,3.4vw,36px);line-height:1.1;display:block}
+.pj2h .cnt{margin:0}
+.pj2 .lead{margin:0 0 6px;max-width:80ch}
+.pj2s{display:flex;align-items:center;gap:10px;margin:22px 0 10px;font-size:15px;letter-spacing:.02em;color:var(--muted);font-weight:600;text-transform:uppercase}
+.swa{max-height:calc(100vh - 96px);overflow:auto;scrollbar-width:thin}
+.swseg{display:flex;gap:3px;margin-top:8px}
+.swseg i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.12)}
+.swseg i.f{background:var(--pc)}
+.sw button[aria-current="true"]{box-shadow:0 0 0 1px var(--pc),0 8px 28px color-mix(in srgb,var(--pc) 22%,transparent)}
+@media(max-width:900px){.swa{max-height:none}.pj2+.pj2{padding-top:36px}.pj2h .cnt{width:100%}}
 </style>
 <div class="bg" aria-hidden="true"><i></i><i></i></div>
 <header class="top">
@@ -460,48 +539,6 @@ const ico=t=>`<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[t]||ICON.Enlace
 let mEstado="",mProy="",mArea="",mQ="",lastFocus=null,stopFx=null,lbFocus=null;
 
 /* ===== resumen ===== */
-function ring(){
-  const n=A.length,C=2*Math.PI*54;let off=0;
-  const segs=ESTADOS.filter(e=>by(e)).map(e=>{const len=by(e)/n*C;const s=`<circle class="seg" data-e="${e}" cx="70" cy="70" r="54" stroke="${COLOR[e]}" stroke-dasharray="0 ${C}" data-d="${Math.max(len-2,.1)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"/>`;off+=len;return s});
-  return `<div class="ringwrap"><svg class="ring" viewBox="0 0 140 140" role="img" aria-label="Tareas por estado"><circle class="track" cx="70" cy="70" r="54"/>${segs.join("")}</svg>
-  <div class="ringc"><b data-to="${n}">0</b><span>tareas</span></div></div>
-  <div class="legend">${ESTADOS.filter(e=>by(e)).map(e=>`<button class="lg" data-state="${e}" title="Ver ${e} en la matriz"><i style="background:${COLOR[e]}"></i>${e} <b>${by(e)}</b></button>`).join("")}</div>`;
-}
-function dayRange(){
-  const f=A.filter(a=>a.fecha).map(a=>a.fecha).sort();if(!f.length)return[];
-  let a=new Date(f[0]+"T00:00"),b=new Date(f[f.length-1]+"T00:00");const t=new Date(REF+"T00:00");
-  if(t>b&&(t-b)/864e5<=10)b=t;
-  const out=[];for(let d=new Date(a);d<=b&&out.length<62;d.setDate(d.getDate()+1)){out.push({iso:isoOf(d),dd:String(d.getDate()).padStart(2,"0"),wd:d.toLocaleDateString("es",{weekday:"narrow"}).toUpperCase(),we:d.getDay()===0||d.getDay()===6})}
-  return out;
-}
-function dot(a,k){return `<button class="dot ${done(a)?"f":""} ${a.vencida?"ov":""}" style="--pc:${P[a.proyecto].color};--k:${k}" data-act="${a.id}" data-p="${a.proyecto}" data-tip="${esc(a.titulo)}" data-tip2="${esc(P[a.proyecto].nombre)} · ${done(a)?"realizada":"pendiente"} · ${fmt(a.fecha)}" aria-label="${esc(a.titulo)}"></button>`}
-function strip(){
-  const days=dayRange(),sf=A.filter(a=>!a.fecha);let k=0;
-  const cols=days.map((d,i)=>{const L=A.filter(a=>a.fecha===d.iso).sort((x,y)=>x.fila-y.fila);
-    return `<div class="day ${d.we?"we":""} ${d.iso===REF?"today":""}"><div class="stack">${L.map(a=>dot(a,k++)).join("")}</div><div class="dl"><b>${d.dd}</b>${d.wd}</div></div>`}).join("");
-  const sfCol=sf.length?`<div class="day"><div class="stack">${sf.map(a=>dot(a,k++)).join("")}</div><div class="dl"><b>—</b>s/f</div></div>`:"";
-  return `<div class="stripwrap reveal"><div class="strip" id="strip">${cols}${sfCol}</div>
-  <div class="slegend"><span class="sym"><i class="f"></i>Realizada</span><span class="sym"><i></i>Pendiente</span><span class="sym"><i class="ov"></i>Vencida</span><span>·</span>
-  ${PR.map(p=>`<button class="pchip" style="--pc:${p.color}" data-iso="${p.id}"><i></i>${esc(p.nombre)}</button>`).join("")}</div></div>`;
-}
-/* Mapa de ruta: etapas del proyecto (config.json). Cumplida = todas sus tareas realizadas (no equivale a validada). */
-function etapasOf(p,L){return(p.etapas||[]).map(e=>{const T=L.filter(a=>a.etapa===e.n),d=T.filter(done).length;
-  const s=e.estado==="cumplida"?"ok":e.estado==="en curso"?"cur":e.estado==="pendiente"?"todo":(T.length&&d===T.length?"ok":T.length?"cur":"todo");
-  return{...e,T,d,s}})}
-function ruta(p,L,big){
-  const E=etapasOf(p,L);if(!E.length)return"";
-  return `<div class="ruta ${big?"big":""}" role="list" aria-label="Mapa de ruta">${E.map((e,i)=>`<div class="et ${e.s}" role="listitem" style="--i:${i}" title="${esc(e.n)}: ${e.s==="ok"?"cumplida":e.s==="cur"?"en curso":"sin tareas aún"}${e.nota?" · "+esc(e.nota):""}"><i aria-hidden="true"></i><b>${esc(e.n)}</b><small>${e.T.length?e.d+" de "+e.T.length+(e.T.length>1?" tareas":" tarea"):(e.nota?"según el responsable":"sin tareas aún")}</small></div>`).join("")}</div>`;
-}
-function card(p,i){
-  const L=actsOf(p.id).sort(sortF),d=L.filter(done).length,ov=L.filter(a=>a.vencida).length,ev=L.filter(withEv).length;
-  const hi=L.filter(a=>a.destacada&&done(a)).slice(-1)[0],last=hi||L.filter(done).slice(-1)[0];
-  return `<button class="card reveal" style="--pc:${p.color};--d:${i*80}ms" data-go="#proyecto/${p.id}">
-   <span class="id"><i></i>${p.id.toUpperCase()}</span><h3>${esc(p.nombre)}</h3>${p.objetivo?`<p class="obj">${esc(p.objetivo)}</p>`:""}
-   ${(p.etapas||[]).length?ruta(p,L,false):""}<div class="seq" ${(p.etapas||[]).length?"hidden":""} aria-label="Secuencia de tareas">${L.map((a,j)=>`${j?`<span class="ln ${done(a)?"f":""}" style="--i:${j}"></span>`:""}<span class="nd ${done(a)?"f":""} ${a.vencida?"ov":""}" style="--i:${j}" title="${esc(a.titulo)}"></span>`).join("")}</div>
-   <dl class="facts"><dt>Realizadas</dt><dd>${d} de ${L.length}</dd><dt>${hi?"★ Hito":"Último avance"}</dt><dd>${last?esc(last.titulo)+" · "+fmt(last.fecha):"Aún sin tareas realizadas"}</dd>
-   <dt>Atención</dt><dd>${ov?`<span class="flag red">${ov} vencida${ov>1?"s":""}</span>`:"Sin vencidas"}</dd><dt>Evidencia</dt><dd>${ev} de ${L.length} con enlace</dd></dl>
-   <span class="go">Ver detalles <span>→</span></span></button>`;
-}
 /* Resumen en texto plano para pegar en Teams o WhatsApp. PAGE_URL es el enlace de esta página (lo fija quien la publica). */
 const PAGE_URL=/github\.io$/.test(location.hostname)?location.href.split("#")[0]:"https://claude.ai/artifact/G85VhXxqtaNvtZoTZEqwXC";
 function resumenTexto(){
@@ -523,36 +560,6 @@ const lkBtn=(e,a,i)=>`<a class="lk" href="${esc(e.url)}" target="_blank" rel="no
 /* Portada «Avances por proyecto»: cada proyecto, en el orden de config.json, con su contexto y TODAS sus actividades (hitos ★ primero),
    estado y evidencia en línea. */
 const lkMini=(e,a,i)=>`<a class="lk mini" href="${esc(e.url)}" target="_blank" rel="noopener" data-prev="${a.id}|${i}" title="${esc(e.nombre)}${e.verif==="verificada"?" · verificada":" · sin comprobar"}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[e.tipo]||ICON.Enlace}</svg>${esc(e.nombre)}${e.verif==="verificada"?" ✓":""}</a>`;
-function vImportante(){
-  const asc=(x,y)=>(x.fecha||"9999").localeCompare(y.fecha||"9999");
-  const G=PR.map(p=>({p,L:actsOf(p.id).sort((x,y)=>(y.destacada?1:0)-(x.destacada?1:0)||asc(x,y))})).filter(g=>g.L.length);
-  if(!G.length)return"";
-  const fila=a=>`<div class="pjr ${a.destacada?"hit":""} ${done(a)?"":"pen"}" style="--pc:${P[a.proyecto].color}">
-    <div class="pjs">${badge(a.estado)}${a.vencida?'<span class="flag red">Vencida</span>':""}<small>${done(a)?fmt(a.fecha):(a.fecha?"para "+fmt(a.fecha):"")}</small></div>
-    <div class="pjm"><button class="pjn" data-act="${a.id}">${a.destacada?STAR:""}${esc(a.titulo)}${a.area?`<small>Área: ${esc(a.area)}</small>`:""}</button>${a.contexto?`<p class="pjx">${esc(a.contexto)}</p>`:""}</div>
-    <div class="pje">${a.enlaces.length?a.enlaces.map((e,j)=>lkMini(e,a,j)).join(""):`<span class="nolk">${done(a)?"Sin evidencia":"Evidencia al terminarlo"}</span>`}</div></div>`;
-  return `<h2 class="reveal">Avances por proyecto <small>Cada proyecto con sus actividades y su evidencia. Los hitos (★) van primero.</small></h2>
-  ${G.map(g=>`<section class="pj reveal" style="--pc:${g.p.color}"><div class="pjh"><h3><i></i>${esc(g.p.nombre)}</h3><span class="pjc">${g.L.filter(done).length} de ${g.L.length} realizadas</span></div>
-   ${g.p.objetivo?`<p class="hpc">${esc(g.p.objetivo)}</p>`:""}<div class="pjt">${g.L.map(fila).join("")}</div></section>`).join("")}`;
-}
-function vImportanteViejo(){
-  const desc=(x,y)=>(y.fecha||"").localeCompare(x.fecha||""),asc=(x,y)=>(x.fecha||"9999").localeCompare(y.fecha||"9999");
-  const G=PR.map(p=>({p,L:A.filter(a=>a.proyecto===p.id&&a.destacada).sort(asc)})).filter(g=>g.L.length);
-  if(!G.length){
-    const L=A.filter(done).sort(desc).slice(0,3);if(!L.length)return"";
-    return `<h2 class="reveal">Últimas tareas realizadas <small>Todavía no hay hitos destacados marcados.</small></h2>
-    <div class="mi-grid">${L.map((a,i)=>`<article class="mi reveal" style="--pc:${P[a.proyecto].color};--d:${i*110}ms">
-     <div class="mh"><span class="pchip" style="--pc:${P[a.proyecto].color}"><i></i>${esc(P[a.proyecto].nombre)}</span><span class="date">${fmt(a.fecha)}</span></div>
-     <button class="mt" data-act="${a.id}">${esc(a.titulo)}</button>
-     <div class="fl" style="justify-content:flex-start;padding:0">${a.enlaces.length?a.enlaces.map((e,j)=>lkBtn(e,a,j)).join(""):'<span class="nolk">Sin vínculo todavía</span>'}</div></article>`).join("")}</div>`;
-  }
-  const hito=(a,i)=>`<article class="mi reveal st ${done(a)?"":"cur"}" style="--pc:${P[a.proyecto].color};--d:${i*90}ms">
-   <div class="mh">${done(a)?`<span class="date">${fmt(a.fecha)}</span>`:`<span class="badge ${cls("En ejecución")}">En curso</span>`}</div>
-   <button class="mt" data-act="${a.id}">${esc(a.titulo)}</button>
-   <div class="fl" style="justify-content:flex-start;padding:0">${a.enlaces.length?a.enlaces.map((e,j)=>lkBtn(e,a,j)).join(""):`<span class="nolk">${done(a)?"Sin vínculo todavía":"En curso: la evidencia llega al terminarlo"}</span>`}</div></article>`;
-  return `<h2 class="reveal">Lo más importante del período <small>Los hitos de cada proyecto, con su evidencia.</small></h2>
-  ${G.map(g=>`<section class="hp"><h3 class="hph reveal" style="--pc:${g.p.color}"><i></i>${esc(g.p.nombre)}</h3>${g.p.objetivo?`<p class="hpc reveal">${esc(g.p.objetivo)}</p>`:""}<div class="mi-grid">${g.L.map(hito).join("")}</div></section>`).join("")}`;
-}
 /* Comparación con el período inmediatamente anterior: se cruzan las tareas por su texto (clave). */
 function compareData(){
   if(sel==="acum")return null;
@@ -595,26 +602,38 @@ function panelProy(){
    <div class="rgl" role="list">${G.map(g=>`<button class="ppr" role="listitem" style="--pc:${g.p.color}" data-go="#proyecto/${g.p.id}"><span class="ppn"><i></i>${esc(g.p.nombre)}</span><span class="ppc"><b>${g.L.filter(done).length}</b> de ${g.L.length}</span></button>`).join("")}</div>
    <p class="rgn">Cada arco es una actividad, agrupada por proyecto. Lleno = realizada; tenue = pendiente.</p></div>`;
 }
-function panelProyViejo(){
-  return `<div class="pp" role="list" aria-label="Avance por proyecto"><div class="ppt">Avance por proyecto <small>una casilla por actividad · llena = realizada</small></div>
-  ${PR.map(p=>{const L=actsOf(p.id).sort((x,y)=>(x.fecha||"9999").localeCompare(y.fecha||"9999")),d=L.filter(done).length;
-   return `<button class="ppr" role="listitem" style="--pc:${p.color}" data-go="#proyecto/${p.id}"><span class="ppn"><i></i>${esc(p.nombre)}</span><span class="ppc"><b>${d}</b> de ${L.length}</span>
-   <span class="pps" aria-hidden="true">${L.map(a=>`<i class="${done(a)?"f":""} ${a.vencida?"ov":""}" title="${esc(a.titulo)}"></i>`).join("")}</span></button>`}).join("")}</div>`;
+/* ===== filas de tareas (Resumen desplegable y Proyectos): hitos ★ primero, luego por fecha; las pendientes al final ===== */
+const ordenTareas=(x,y)=>(y.destacada?1:0)-(x.destacada?1:0)||(x.fecha||"9999").localeCompare(y.fecha||"9999")||x.fila-y.fila;
+function tareaFila(a){
+  const falta=!done(a)&&a.pendiente?`<p class="pjx fal">${esc(a.pendiente)}</p>`:"";
+  return `<div class="pjr ${a.destacada?"hit":""} ${done(a)?"":"pen"}" style="--pc:${P[a.proyecto].color}">
+    <div class="pjs">${badge(a.estado)}${a.vencida?'<span class="flag red">Vencida</span>':""}<small>${done(a)?fmt(a.fecha):(a.fecha?"para "+fmt(a.fecha):"")}</small></div>
+    <div class="pjm"><button class="pjn" data-act="${a.id}">${a.destacada?STAR:""}${esc(a.titulo)}${a.area?`<small>Área: ${esc(a.area)}</small>`:""}</button>${a.contexto?`<p class="pjx">${esc(a.contexto)}</p>`:""}${falta}</div>
+    <div class="pje">${a.enlaces.length?a.enlaces.map((e,j)=>lkMini(e,a,j)).join(""):`<span class="nolk">${done(a)?"Sin evidencia":"Evidencia al terminarlo"}</span>`}</div></div>`;
+}
+/* Resumen: solo el título de cada proyecto (en el orden de config.json); al desplegarlo se ven las tareas realizadas. */
+function acordeonProy(g){
+  const H=g.L.filter(done),pend=g.L.length-H.length;
+  return `<details class="ac reveal" name="resumen-proy" style="--pc:${g.p.color}">
+   <summary><span class="acn"><i></i>${esc(g.p.nombre)}</span><span class="acc"><b>${H.length}</b> de ${g.L.length}</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+   <div class="acb">${g.p.objetivo?`<p class="hpc">${esc(g.p.objetivo)}</p>`:""}
+    <div class="pjt">${H.length?H.map(tareaFila).join(""):'<div class="empty">Todavía no hay tareas realizadas en este proyecto.</div>'}</div>
+    <div class="acf"><span>${pend?pend+" pendiente"+(pend>1?"s":""):"Sin pendientes"}</span><button class="btn" data-go="#proyecto/${g.p.id}">Ver el proyecto →</button></div></div></details>`;
 }
 function vResumen(){
   const n=A.length,open=n-nDone,latest=PERIODS[PERIODS.length-1];
   const banner=latest&&sel!==latest.id?`<div class="vb"><span>${sel==="acum"?"Vista acumulada de todos los períodos: cada tarea cuenta una vez, con su último estado.":"Estás viendo un período anterior ("+plabel(DATA)+")."}</span><button class="btn" data-sel="${latest.id}">Ir al período más reciente</button></div>`:"";
+  const G=PR.map(p=>({p,L:actsOf(p.id).sort(ordenTareas)})).filter(g=>g.L.length);
   return `${banner}<section class="hero"><canvas id="fx"></canvas>
    <div><p class="eyebrow">${esc(DATA.etiqueta)} · ${fmt(DATA.desde)} – ${fmt(DATA.hasta)}</p>
     <h1><span class="g">${n} tareas</span> en ${PR.length} proyectos: ${nDone} realizadas, ${open} por cerrar</h1>
     <p class="lead">${esc(DATA.preparado||"")}. Cada tarea tiene su fecha, su proyecto y su vínculo de evidencia; lo realizado se distingue de lo validado.</p>
-    <div class="cta"><button class="btn pri" data-go="#realizadas">Ver tareas realizadas</button><button class="btn" data-go="#proyectos">Ver proyectos</button><button class="btn" id="cpbtn" data-copy="1">Copiar resumen</button></div><div id="cpslot"></div></div>
+    <div class="cta"><button class="btn pri" data-go="#proyectos">Ver proyectos</button><button class="btn" id="cpbtn" data-copy="1">Copiar resumen</button></div><div id="cpslot"></div></div>
    <div>${panelProy()}</div></section>
-  ${vImportante()}
-  ${sel==="acum"?"":`<h2 class="reveal">Ritmo del período <small>Cada punto es una tarea en su fecha. Haz clic para ver el detalle.</small></h2>${strip()}`}
+  <h2 class="reveal">Proyectos <span class="n">${G.length}</span> <small>Toca un proyecto para ver lo que se realizó.</small></h2>
+  <div class="acs">${G.map(acordeonProy).join("")}</div>
   ${vCompare()}
-  <h2 class="reveal">Proyectos <span class="n">${PR.length}</span></h2><div class="cards">${PR.map(card).join("")}</div>
-  <p class="note">No se muestran porcentajes de avance por proyecto: no hay hitos ponderados definidos. El avance de cada proyecto se muestra como secuencia de tareas (relleno = realizada). «Realizada» no equivale a «validada». Datos de: ${esc(DATA.origen)} · generado el ${esc(DATA.generado)}.</p>`;
+  <p class="note">No se muestran porcentajes de avance por proyecto: no hay hitos ponderados definidos; se cuenta cuántas actividades están realizadas. «Realizada» no equivale a «validada». Datos de: ${esc(DATA.origen)} · generado el ${esc(DATA.generado)}.</p>`;
 }
 
 /* ===== historial de períodos ===== */
@@ -635,50 +654,30 @@ function vHistorial(){
   <button class="hc reveal ${sel==="acum"?"cur":""}" data-sel="acum" style="margin-top:10px"><div><b>Acumulado de todos los períodos</b><div class="m">Cada tarea cuenta una vez, con su último estado</div></div><span class="badge ${sel==="acum"?"s-En-ejecución":"s-Pendiente"}">${sel==="acum"?"Mostrando":"Abrir"}</span></button>`;
 }
 
-/* ===== tareas realizadas: qué se hizo, cuándo y su vínculo ===== */
-let rProy="",rView="lista",rEv="todas";
+/* ===== proyectos: lateral para elegir (en celular se abre como panel) y todas las tareas del proyecto elegido ===== */
 const STAR='<span class="star" title="Hito destacado">★</span> ';
-function vRealizadas(){
-  const D=A.filter(done),nCon=D.filter(withEv).length,nFalta=D.length-nCon;
-  const L=D.filter(a=>(!rProy||a.proyecto===rProy)&&(rEv==="con"?withEv(a):rEv==="faltan"?!withEv(a):true)).sort((a,b)=>(b.fecha||"").localeCompare(a.fecha||"")||b.fila-a.fila);
-  const dlong=iso=>{if(!iso)return"Sin fecha";const s=new Date(iso+"T00:00").toLocaleDateString("es",{weekday:"long",day:"numeric",month:"long"});return s.charAt(0).toUpperCase()+s.slice(1)};
-  let k=0;
-  const lk=(e,a,i)=>`<a class="lk" href="${esc(e.url)}" target="_blank" rel="noopener" data-prev="${a.id}|${i}" title="${esc(e.nombre)}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[e.tipo]||ICON.Enlace}</svg>${e.verif==="verificada"?"Ver evidencia ✓":"Ver evidencia"}<small>${e.tipo}</small></a>`;
-  const lista=()=>{const groups=[];L.forEach(a=>{const g=groups.find(x=>x.k===(a.fecha||""));if(g)g.L.push(a);else groups.push({k:a.fecha||"",L:[a]})});
-    return groups.map(g=>`<h2 class="reveal" style="font-size:16px">${dlong(g.k)} <span class="n">${g.L.length}</span></h2>
-   <div class="feed">${g.L.map(a=>`<div class="fi reveal" style="--pc:${P[a.proyecto].color};--d:${(k++%6)*60}ms">
-     <button class="fm" data-act="${a.id}"><span class="t">${a.destacada?STAR:""}${esc(a.titulo)}</span><span class="m"><span class="pchip" style="--pc:${P[a.proyecto].color}"><i></i>${esc(P[a.proyecto].nombre)}</span>${a.area?`<span>Área: ${esc(a.area)}</span>`:""}<span class="date">${a.id}</span></span></button>
-     <div class="fl">${a.enlaces.length?a.enlaces.map((e,i)=>lk(e,a,i)).join(""):'<span class="nolk">Sin vínculo todavía</span>'}</div></div>`).join("")}</div>`).join("")};
-  const muro=()=>PR.map(p=>({p,L:L.filter(a=>a.proyecto===p.id)})).filter(g=>g.L.length).map(g=>`<h2 class="reveal" style="color:${g.p.color};font-size:18px">${esc(g.p.nombre)} <span class="n">${g.L.length}</span></h2><div class="wall">${g.L.map(a=>a.enlaces.length?a.enlaces.map(e=>evTile(e,a)).join(""):noTile(a)).join("")}</div>`).join("");
-  const sg=(attr,cur,items)=>`<div class="seg" role="group">${items.map(([v,l])=>`<button data-${attr}="${v}" aria-pressed="${cur===v}">${l}</button>`).join("")}</div>`;
-  return `<p class="eyebrow">Qué se hizo y cómo se comprueba</p><h1 style="font-size:clamp(28px,3.6vw,42px)">Tareas realizadas</h1>
-  <p class="lead"><b style="color:var(--text)">${D.length}</b> tareas realizadas · <b style="color:${nCon?"var(--green)":"var(--amber)"}">${nCon}</b> con vínculo de evidencia. Las más recientes primero. «Realizada» no equivale a «validada».</p>
-  <div class="slegend" style="margin:0 0 12px"><button class="pchip" data-rp="" style="--pc:var(--cyan);${rProy===""?"border-color:var(--cyan)":""}"><i></i>Todos (${D.length})</button>${PR.filter(p=>D.some(a=>a.proyecto===p.id)).map(p=>`<button class="pchip" data-rp="${p.id}" style="--pc:${p.color};${rProy===p.id?"border-color:"+p.color:""}"><i></i>${esc(p.nombre)} (${D.filter(a=>a.proyecto===p.id).length})</button>`).join("")}</div>
-  <div class="ctl">${sg("rv",rView,[["lista","Lista"],["muro","Miniaturas"]])}${sg("re",rEv,[["todas","Todas ("+D.length+")"],["con","Con vínculo ("+nCon+")"],["faltan","Falta vínculo ("+nFalta+")"]])}</div>
-  ${L.length?(rView==="muro"?muro():lista()):'<div class="pnl"><div class="empty">No hay tareas realizadas para este filtro.</div></div>'}`;
-}
-
-/* ===== proyectos ===== */
-function evTile(e,a){
-  const u=esc(e.url),img=e.tipo==="Imagen"&&e.asset===true;
-  return `<a class="tile" href="${u}" target="_blank" rel="noopener" data-prev="${a.id}|${a.enlaces.indexOf(e)}"><div class="pv"><div class="ph">${ico(e.tipo)}${e.tipo}</div>${img?`<img loading="lazy" src="${u}" alt="" onerror="this.style.display='none'">`:""}</div>
-   <div class="tc"><span>${esc(e.nombre)}</span><small>${esc(a.titulo)}</small><span class="ev ${e.verif}">${VERIF[e.verif]}</span></div></a>`;
-}
-function noTile(a){return `<div class="tile none"><div class="pv"><div class="ph">${ico("Enlace")}Sin evidencia</div></div><div class="tc"><span>${esc(a.titulo)}</span><small>${esc(P[a.proyecto].nombre)} · ${fmt(a.fecha)}</small><span class="ev sin_evidencia">Falta el enlace</span></div></div>`}
+let spyFn=null;
+/* Proyectos: TODOS los proyectos seguidos, uno tras otro y en el orden de config.json, cada uno con su franja de identificación.
+   El lateral (en celular, un panel) salta a cada proyecto y resalta el que se está viendo. */
 function vProyectos(pid){
-  const p=P[pid]||PR[0],L=actsOf(p.id).sort(sortF),ev=L.flatMap(a=>a.enlaces.map(e=>[e,a])),pend=L.filter(a=>!done(a));
-  const hi=L.filter(a=>a.destacada&&done(a)).slice(-1)[0];
-  const item=a=>`<button class="tli reveal" style="--c:${COLOR[a.estado]}" data-act="${a.id}"><div class="top2"><span class="date">${fmt(a.fecha)} · ${a.id}</span>${badge(a.estado)}</div><div class="t">${a.destacada?STAR:""}${esc(a.titulo)}</div><div class="m">${a.vencida?'<span class="flag red">Vencida</span>':""}${a.area?`<span>Área: ${esc(a.area)}</span>`:""}<span class="ev ${evBest(a)}">${VERIF[evBest(a)]}</span></div></button>`;
-  return `<div class="split"><nav class="sw" aria-label="Proyectos">${PR.map(x=>`<button style="--pc:${x.color}" data-go="#proyecto/${x.id}" ${x.id===p.id?'aria-current="true"':""}><small>${actsOf(x.id).filter(done).length} de ${actsOf(x.id).length} realizadas</small><b>${esc(x.nombre)}</b></button>`).join("")}</nav>
-  <div class="pd"><p class="eyebrow" style="color:${p.color}">Proyecto</p><h1>${esc(p.nombre)}</h1>${p.objetivo?`<p class="lead">${esc(p.objetivo)}</p>`:""}
-   <div class="cnt"><div><b>${L.filter(done).length}/${L.length}</b>realizadas</div><div><b>${L.filter(a=>a.vencida).length}</b>vencidas</div><div><b>${ev.length}</b>enlaces de evidencia</div></div>
-   ${hi?`<div class="hl reveal"><span class="star big">★</span><div><small>Hito destacado · ${fmt(hi.fecha)}</small><b>${esc(hi.titulo)}</b><div class="fl" style="justify-content:flex-start;margin-top:10px;padding:0">${hi.enlaces.length?hi.enlaces.map((e,i)=>`<a class="lk" href="${esc(e.url)}" target="_blank" rel="noopener" data-prev="${hi.id}|${i}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[e.tipo]||ICON.Enlace}</svg>Ver evidencia<small>${e.tipo}</small></a>`).join(""):'<span class="nolk">Sin vínculo todavía</span>'}</div></div></div>`:""}
-   ${(p.etapas||[]).length?`<h2 class="reveal">Mapa de ruta</h2>${ruta(p,L,true)}<p class="note" style="margin-top:12px">Etapa cumplida = todas sus tareas realizadas (no significa validada). Etapa en curso = tiene tareas pendientes. Las etapas y su vínculo con las tareas se definen en la configuración del tablero.</p>`:""}
-   <h2>Secuencia de trabajo <span class="n">${L.length}</span></h2><div class="tl">${L.map(item).join("")}</div>
-   <h2>Evidencias <span class="n">${ev.length}</span></h2>
-   ${ev.length||L.some(done)?`<div class="wall">${ev.map(([e,a])=>evTile(e,a)).join("")}${L.filter(a=>done(a)&&!withEv(a)).map(noTile).join("")}</div>`:'<div class="pnl"><div class="empty">Todavía no hay tareas realizadas en este proyecto.</div></div>'}
-   <h2>Pendientes <span class="n">${pend.length}</span></h2>
-   <div class="pnl">${pend.map(a=>`<button class="row" data-act="${a.id}">${a.vencida?'<span class="flag red">Vencida</span>':'<span class="flag amb">Pendiente</span>'}<div><div class="t">${esc(a.titulo)}</div><div class="m">${a.fecha?"Fecha objetivo: "+fmt(a.fecha):"Sin fecha"}${a.pendiente?" · "+esc(a.pendiente):""}</div></div></button>`).join("")||'<div class="empty">Sin pendientes en este proyecto.</div>'}</div>
+  const G=PR.map((p,i)=>({p,i,L:actsOf(p.id).sort(ordenTareas)})).filter(g=>g.L.length);
+  if(!G.length)return '<div class="pnl"><div class="empty">Este período todavía no tiene proyectos.</div></div>';
+  const a0=G.find(g=>g.p.id===pid)||G[0];
+  const lista=(T,tit)=>T.length?`<h3 class="pj2s reveal">${tit} <span class="n">${T.length}</span></h3><div class="pjt reveal">${T.map(tareaFila).join("")}</div>`:"";
+  const ic=d=>`<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+  const sec=g=>{
+    const H=g.L.filter(done),pend=g.L.filter(a=>!done(a)),ev=g.L.reduce((s,a)=>s+a.enlaces.length,0),ov=g.L.filter(a=>a.vencida).length;
+    return `<section class="pj2" id="p-${g.p.id}" data-pid="${g.p.id}" style="--pc:${g.p.color}">
+     <header class="pj2h reveal"><span class="pj2n">${String(g.i+1).padStart(2,"0")}</span><div class="pj2t"><p class="eyebrow">Proyecto ${g.i+1} de ${PR.length}</p><h2>${esc(g.p.nombre)}</h2></div>
+      <div class="cnt"><div><b>${H.length}/${g.L.length}</b>realizadas</div>${pend.length?`<div><b>${pend.length}</b>pendientes</div>`:""}${ov?`<div><b>${ov}</b>vencidas</div>`:""}<div><b>${ev}</b>enlaces</div></div></header>
+     ${g.p.objetivo?`<p class="lead reveal">${esc(g.p.objetivo)}</p>`:""}
+     ${lista(H,"Realizadas")}${lista(pend,"Pendientes")}</section>`};
+  return `<div class="split" id="spl"><div class="swscrim" data-pick></div>
+  <aside class="swa" aria-label="Elegir proyecto"><div class="swh"><b>Proyectos</b><button class="btn" data-pick aria-label="Cerrar">✕</button></div>
+   <nav class="sw">${G.map(g=>`<button style="--pc:${g.p.color}" data-jump="${g.p.id}" aria-current="${g.p.id===a0.p.id}"><span class="swn">${g.i+1}</span><span class="swt"><b>${esc(g.p.nombre)}</b><small>${g.L.filter(done).length} de ${g.L.length} realizadas</small><span class="swseg" aria-hidden="true">${g.L.map(a=>`<i class="${done(a)?"f":""}"></i>`).join("")}</span></span></button>`).join("")}</nav></aside>
+  <div class="pd">
+   <button class="pickbtn" data-pick aria-label="Elegir otro proyecto">${ic('<path d="M4 7h16M4 12h16M4 17h10"/>')}<span id="pkn">${esc(a0.p.nombre)}</span><small id="pkc">${a0.i+1} de ${PR.length}</small>${ic('<path d="M6 9l6 6 6-6"/>')}</button>
+   ${G.map(sec).join("")}
   </div></div>`;
 }
 
@@ -723,7 +722,7 @@ function drawerHTML(a){
   <span class="date">${a.id} · fila ${a.fila} del Excel</span><h3>${a.destacada?STAR:""}${esc(a.titulo)}</h3>${badge(a.estado)} ${a.vencida?'<span class="flag red">Vencida</span>':a.venceHoy?'<span class="flag amb">Vence hoy</span>':""}
   <div class="sec"><h4>Datos</h4><dl class="kvs"><dt>Proyecto</dt><dd><span class="pchip" style="--pc:${P[a.proyecto].color}"><i></i>${esc(P[a.proyecto].nombre)}</span></dd>
    ${li("Área",a.area||"Por completar")}${li(done(a)?"Fecha de realización":"Fecha objetivo",a.fecha?fmt(a.fecha)+" "+a.fecha.slice(0,4):"Sin fecha")}${li("Entregable",a.entregable)}${li("Responsable",a.responsable)}</dl></div>
-  ${sec("Contexto",a.contexto)}${sec("Resultado",a.resultado)}
+  ${sec("Qué se hizo",a.detalle||a.contexto)}${sec("Resultado",a.resultado)}
   <div class="sec"><h4>Evidencias</h4><div class="evl">${a.enlaces.length?a.enlaces.map((e,i)=>`<div class="evi"><div><a href="${esc(e.url)}" target="_blank" rel="noopener" data-prev="${a.id}|${i}">${esc(e.nombre)}</a><div class="tp">${e.tipo}</div></div><span class="ev ${e.verif}">${VERIF[e.verif]}</span></div>`).join(""):'<div class="evi"><span>No hay evidencia enlazada para esta tarea.</span><span class="ev sin_evidencia">Sin evidencia</span></div>'}</div></div>
   ${sec("Pendiente",a.pendiente||(done(a)?"":"Aún no marcada como realizada."))}${sec("Observaciones",a.nota)}
   ${a.fechaNota?`<div class="sec"><h4>Fecha ajustada</h4><p class="orig">${esc(a.fechaNota)}</p></div>`:""}
@@ -776,7 +775,7 @@ function startFx(cv){
 /* ===== ruteo ===== */
 let cur=location.hash||"#resumen";
 function go(h){try{location.hash=h}catch(e){}cur=h;closeDrawer();render()}
-function route(){const h=cur;if(h.startsWith("#proyecto/"))return{v:"proyectos",id:h.split("/")[1]};const k=h.slice(1);if(k==="evidencias")return{v:"realizadas"};if(k==="control"&&EDITOR)return{v:"control"};return{v:["matriz","proyectos","historial","realizadas"].includes(k)?k:"resumen"}}
+function route(){const h=cur;if(h.startsWith("#proyecto/"))return{v:"proyectos",id:h.split("/")[1]};const k=h.slice(1);if(k==="evidencias"||k==="realizadas")return{v:"proyectos"};if(k==="control"&&EDITOR)return{v:"control"};if(k==="matriz"&&!EDITOR)return{v:"resumen"};return{v:["matriz","proyectos","historial"].includes(k)?k:"resumen"}}
 /* Estados de la página antes de tener datos: carga, sin acceso, error, base vacía. */
 function stateView(){
   const box=(h,t)=>`<div class="ldg"><div style="max-width:46ch"><p class="eyebrow">Centro de Avances</p><h1 style="font-size:clamp(24px,4vw,38px)">${h}</h1><p class="lead" style="margin:0 auto">${t}</p></div></div>`;
@@ -786,12 +785,12 @@ function stateView(){
   if(!PERIODS.length)return box("Aún no hay períodos cargados","Cuando se cargue el primero con el skill «tablero-avances», aparecerá aquí con sus tareas, evidencias e historial.");
   return null;
 }
-function viewHTML(r){return r.v==="resumen"?vResumen():r.v==="realizadas"?vRealizadas():r.v==="matriz"?vMatriz():r.v==="historial"?vHistorial():r.v==="control"?vControl():vProyectos(r.id)}
+function viewHTML(r){return r.v==="resumen"?vResumen():r.v==="matriz"?vMatriz():r.v==="historial"?vHistorial():r.v==="control"?vControl():vProyectos(r.id)}
 function render(keep){
   if(stopFx){stopFx();stopFx=null}
   const r=route(),sv=stateView(),ready=!sv,nIss=ready&&EDITOR?issues().filter(i=>i.L.length).length:0;
   /* Quien solo mira ve 4 pestañas; la matriz y el control de datos son para quien prepara el informe. */
-  const tabs=[["resumen","Resumen","Resumen",'<path d="M3 11l9-8 9 8M5 10v10h14V10"/>'],["realizadas","Tareas realizadas","Tareas",'<path d="M5 12l4 4 10-10"/>'],["proyectos","Proyectos","Proyectos",'<path d="M3 7h7l2 2h9v10H3z"/>'],["historial","Historial","Historial",'<path d="M12 7v5l3 2M21 12a9 9 0 1 1-3-6.7"/>']];
+  const tabs=[["resumen","Resumen","Resumen",'<path d="M3 11l9-8 9 8M5 10v10h14V10"/>'],["proyectos","Proyectos","Proyectos",'<path d="M3 7h7l2 2h9v10H3z"/>'],["historial","Historial","Historial",'<path d="M12 7v5l3 2M21 12a9 9 0 1 1-3-6.7"/>']];
   if(EDITOR){tabs.push(["matriz","Matriz","Matriz",'<path d="M4 4h16v16H4zM4 10h16M10 4v16"/>']);tabs.push(["control","Control de datos","Control",'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>'])}
   $("#tabs").innerHTML=ready?tabs.map(([k,l,s,ic])=>`<button class="tab" data-go="#${k}" ${k===r.v?'aria-current="page"':""}><svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${ic}</svg><span class="lg">${l}</span><span class="sh">${s}</span>${k==="control"&&nIss?`<span class="cb">${nIss}</span>`:""}</button>`).join(""):"";
   const ps=$("#persel");
@@ -800,6 +799,8 @@ function render(keep){
   m.innerHTML=sv||viewHTML(r);
   if(ready)wire(m);
   window.scrollTo(0,keep?y:0);
+  /* #proyecto/<id>: se baja hasta ese proyecto dentro de la lista continua */
+  if(ready&&r.v==="proyectos"&&r.id&&!keep){const el=document.getElementById("p-"+r.id);if(el)window.scrollTo(0,el.getBoundingClientRect().top+window.scrollY-(innerWidth<=900?132:84))}
   if(ready&&r.v==="resumen")stopFx=startFx($("#fx"));
 }
 function wire(m){
@@ -814,9 +815,29 @@ function wire(m){
     b.onmouseenter=on;b.onfocus=on;b.onmouseleave=off;b.onblur=off;b.onclick=()=>{mProy=b.dataset.iso;mEstado=mArea=mQ="";go("#matriz")}});
   m.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>copiarResumen(b));
   m.querySelectorAll("[data-sel]").forEach(b=>b.onclick=()=>{sel=b.dataset.sel;applyData();go("#resumen")});
-  m.querySelectorAll("[data-rv]").forEach(b=>b.onclick=()=>{rView=b.dataset.rv;rerender()});
-  m.querySelectorAll("[data-re]").forEach(b=>b.onclick=()=>{rEv=b.dataset.re;rerender()});
-  m.querySelectorAll("[data-rp]").forEach(b=>b.onclick=()=>{rProy=b.dataset.rp;rerender()});
+  /* lateral de proyectos: en celular se abre y se cierra como panel */
+  m.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{const s=m.querySelector("#spl");if(s)s.classList.toggle("pick")});
+  /* resumen: al abrir un proyecto se cierra el que estaba abierto (también lo hace el navegador con name="resumen-proy") */
+  m.querySelectorAll("details.ac").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)m.querySelectorAll("details.ac[open]").forEach(o=>{if(o!==d)o.open=false})}));
+  /* proyectos: lista continua; el lateral salta a cada proyecto y resalta el que se está viendo (con su color de fondo) */
+  if(spyFn){window.removeEventListener("scroll",spyFn);spyFn=null}
+  const secs=m.querySelectorAll(".pj2");
+  if(secs.length){
+    const off=()=>innerWidth<=900?132:84;
+    const mark=id=>{
+      m.querySelectorAll(".sw button").forEach(b=>b.setAttribute("aria-current",String(b.dataset.jump===id)));
+      const g=PR.findIndex(x=>x.id===id),n=$("#pkn"),c=$("#pkc");if(n&&P[id])n.textContent=P[id].nombre;if(c)c.textContent=(g+1)+" de "+PR.length;
+      if(P[id])document.documentElement.style.setProperty("--glow",P[id].color)};
+    m.querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>{
+      const el=document.getElementById("p-"+b.dataset.jump);if(!el)return;
+      window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-off(),behavior:RM?"auto":"smooth"});
+      try{history.replaceState(null,"","#proyecto/"+b.dataset.jump)}catch(e){}cur="#proyecto/"+b.dataset.jump;
+      const s=m.querySelector("#spl");if(s)s.classList.remove("pick")});
+    let raf=0,act="";
+    const upd=()=>{raf=0;const line=off()+40;let id=secs[0].dataset.pid;secs.forEach(s=>{if(s.getBoundingClientRect().top<=line)id=s.dataset.pid});if(id!==act){act=id;mark(id)}};
+    spyFn=()=>{if(!raf)raf=requestAnimationFrame(upd)};
+    window.addEventListener("scroll",spyFn,{passive:true});upd();
+  }else document.documentElement.style.setProperty("--glow","transparent");
   const q=$("#q");
   if(q){q.oninput=()=>{mQ=q.value;const s=q.selectionStart;rerender();const n=$("#q");n.focus();n.setSelectionRange(s,s)};
     $("#fe").onchange=e=>{mEstado=e.target.value;rerender()};$("#fp").onchange=e=>{mProy=e.target.value;rerender()};$("#fa").onchange=e=>{mArea=e.target.value;rerender()}}
