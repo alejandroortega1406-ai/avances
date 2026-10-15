@@ -284,6 +284,56 @@ tr.click{cursor:pointer;transition:background .2s}tr.click:hover{background:var(
 .mt{background:none;border:0;text-align:left;padding:0;font-family:var(--disp);font-size:clamp(18px,2.2vw,22px);line-height:1.25;letter-spacing:-.015em;font-weight:600;color:var(--text);transition:color .2s}
 .mt:hover{color:var(--cyan)}
 .mi .fl{margin-top:auto}
+.mi.cur{border-style:dashed}
+.hp{margin:0 0 22px}
+.hph{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-family:var(--disp);font-size:clamp(17px,2vw,20px);font-weight:600;letter-spacing:-.01em;color:var(--pc)}
+.pp{display:grid;gap:4px;width:100%;max-width:520px;margin-inline:auto;border:1px solid var(--line);border-radius:22px;padding:16px 18px;background:var(--panel);backdrop-filter:blur(6px)}
+.rgw{position:relative;width:min(100%,320px);margin:4px auto 10px}
+.rg{display:block;width:100%;height:auto;overflow:visible}
+.rg .sg{fill:none;stroke-width:22;stroke-linecap:butt;cursor:pointer;transition:stroke-width .15s,filter .15s;outline:none}
+.rg .sg:hover,.rg .sg:focus-visible{stroke-width:27;filter:drop-shadow(0 0 6px currentColor)}
+.rgc{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;text-align:center;pointer-events:none}
+.rgc b{font-family:var(--disp);font-size:clamp(52px,9vw,66px);line-height:1;letter-spacing:-.03em}
+.rgc span{font-size:17px;color:var(--text);margin-top:2px}
+.rgc small{margin-top:4px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.rgl{display:grid;gap:2px}
+.rgn{margin:8px 4px 0;font-size:12px;line-height:1.45;color:var(--muted)}
+.ppt{font-family:var(--disp);font-size:16px;font-weight:600;margin-bottom:6px}
+.ppt small{display:block;margin-top:2px;font-family:inherit;font-size:12px;font-weight:400;color:var(--muted)}
+.ppr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:9px 8px;border:0;border-radius:12px;background:none;text-align:left;color:var(--text);font:inherit;cursor:pointer;transition:background .2s}
+.ppr:hover{background:rgba(255,255,255,.05)}
+.ppn{display:flex;align-items:center;gap:9px;font-weight:500;font-size:14.5px;min-width:0}
+.ppn i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--pc);box-shadow:0 0 10px var(--pc)}
+.ppc{font-size:13px;color:var(--muted);white-space:nowrap}
+.ppc b{color:var(--text);font-size:15px}
+.pps{grid-column:1/-1;display:flex;gap:4px}
+.pps i{flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.08)}
+.pps i.f{background:var(--pc);border-color:var(--pc)}
+.pps i.ov{border-color:var(--red)}
+.pj{margin:0 0 26px}
+.pjh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 6px}
+.pjh h3{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--disp);font-size:clamp(18px,2.2vw,23px);font-weight:600;letter-spacing:-.01em;color:var(--pc)}
+.pjh h3 i{width:10px;height:10px;border-radius:50%;background:var(--pc);box-shadow:0 0 12px var(--pc)}
+.pjc{color:var(--muted);font-size:13px}
+.pjt{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+.pjr{display:grid;grid-template-columns:132px minmax(0,1fr);gap:8px 16px;align-items:start;padding:12px 16px;border-top:1px solid var(--line)}
+.pjr .pje{grid-column:2}
+.pjr:first-child{border-top:0}
+.pjr.hit{background:linear-gradient(90deg,color-mix(in srgb,var(--pc) 13%,transparent),transparent 65%)}
+.pjs{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.pjs small{color:var(--muted);font-size:12px}
+.pjn{background:none;border:0;text-align:left;padding:0;font:inherit;font-weight:500;line-height:1.35;color:var(--text);cursor:pointer}
+.pjn:hover{color:var(--cyan)}
+.pjm{min-width:0}
+.pjx{margin:8px 0 0;max-width:80ch;color:var(--muted);font-size:13.5px;line-height:1.6}
+.pjn small{display:block;margin-top:2px;font-weight:400;font-size:12.5px;color:var(--muted)}
+.pje{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start}
+.pje{min-width:0}
+.pje .lk.mini{padding:5px 10px;font-size:12px;max-width:min(260px,100%);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pje .lk.mini svg{flex:none}
+@media(max-width:820px){.pjr{grid-template-columns:1fr}.pjr .pje{grid-column:1}.pjs{flex-direction:row;align-items:center;flex-wrap:wrap}}
+.hpc{margin:0 0 12px;max-width:78ch;color:var(--muted);font-size:14.5px;line-height:1.55}
+.hph i{width:10px;height:10px;border-radius:50%;background:var(--pc);box-shadow:0 0 12px var(--pc)}
 .ruta{display:flex;margin:4px 0}
 .et{flex:1;min-width:0;position:relative;text-align:center;padding-top:26px}
 .et::before{content:"";position:absolute;top:8px;left:-50%;right:50%;height:3px;background:var(--line2);border-radius:2px}
@@ -455,7 +505,7 @@ function card(p,i){
 /* Resumen en texto plano para pegar en Teams o WhatsApp. PAGE_URL es el enlace de esta página (lo fija quien la publica). */
 const PAGE_URL=/github\.io$/.test(location.hostname)?location.href.split("#")[0]:"https://claude.ai/artifact/G85VhXxqtaNvtZoTZEqwXC";
 function resumenTexto(){
-  const n=A.length,desc=(x,y)=>(y.fecha||"").localeCompare(x.fecha||""),hs=A.filter(a=>a.destacada&&done(a)).sort(desc).slice(0,3);
+  const n=A.length,asc=(x,y)=>(x.fecha||"9999").localeCompare(y.fecha||"9999"),hs=PR.flatMap(p=>A.filter(a=>a.proyecto===p.id&&a.destacada&&done(a)).sort(asc));
   const rango=DATA.desde?`${fmt(DATA.desde)} – ${fmt(DATA.hasta)}`:"";
   const l=[`Avances ${sel==="acum"?"acumulados":rango}: ${n} tareas en ${PR.length} proyectos; ${nDone} realizadas, ${n-nDone} por cerrar.`];
   if(hs.length){l.push("","Lo más importante:");hs.forEach(a=>l.push(`• ${a.titulo} (${P[a.proyecto].nombre}, ${fmt(a.fecha)})`))}
@@ -467,17 +517,41 @@ async function copiarResumen(btn){
   try{await navigator.clipboard.writeText(t);const o=btn.textContent;btn.textContent="¡Copiado!";setTimeout(()=>{btn.textContent=o},2200)}
   catch(e){const s=$("#cpslot");s.innerHTML=`<div class="cpbox"><small>Selecciona el texto y cópialo:</small><textarea id="cptxt" readonly></textarea></div>`;const ta=$("#cptxt");ta.value=t;ta.focus();ta.select()}
 }
-/* Portada: los hitos destacados (hasta 3, los más recientes) con su evidencia. Sin hitos marcados, muestra las últimas realizadas. */
+/* Portada: los hitos destacados agrupados por proyecto, en el orden de los proyectos del período (el orden de config.json), con su evidencia.
+   Un hito aún pendiente se muestra «En curso». Sin hitos marcados, muestra las últimas 3 realizadas. */
 const lkBtn=(e,a,i)=>`<a class="lk" href="${esc(e.url)}" target="_blank" rel="noopener" data-prev="${a.id}|${i}" title="${esc(e.nombre)}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[e.tipo]||ICON.Enlace}</svg>${e.verif==="verificada"?"Ver evidencia ✓":"Ver evidencia"}<small>${esc(e.tipo)}</small></a>`;
+/* Portada «Avances por proyecto»: cada proyecto, en el orden de config.json, con su contexto y TODAS sus actividades (hitos ★ primero),
+   estado y evidencia en línea. */
+const lkMini=(e,a,i)=>`<a class="lk mini" href="${esc(e.url)}" target="_blank" rel="noopener" data-prev="${a.id}|${i}" title="${esc(e.nombre)}${e.verif==="verificada"?" · verificada":" · sin comprobar"}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[e.tipo]||ICON.Enlace}</svg>${esc(e.nombre)}${e.verif==="verificada"?" ✓":""}</a>`;
 function vImportante(){
-  const desc=(x,y)=>(y.fecha||"").localeCompare(x.fecha||"");
-  const hs=A.filter(a=>a.destacada&&done(a)).sort(desc).slice(0,3),fb=!hs.length,L=fb?A.filter(done).sort(desc).slice(0,3):hs;
-  if(!L.length)return"";
-  return `<h2 class="reveal">${fb?"Últimas tareas realizadas":"Lo más importante del período"} <small>${fb?"Todavía no hay hitos destacados marcados.":"Los hitos destacados, con su evidencia."}</small></h2>
-  <div class="mi-grid">${L.map((a,i)=>`<article class="mi reveal ${fb?"":"st"}" style="--pc:${P[a.proyecto].color};--d:${i*110}ms">
-   <div class="mh"><span class="pchip" style="--pc:${P[a.proyecto].color}"><i></i>${esc(P[a.proyecto].nombre)}</span><span class="date">${fmt(a.fecha)}</span></div>
+  const asc=(x,y)=>(x.fecha||"9999").localeCompare(y.fecha||"9999");
+  const G=PR.map(p=>({p,L:actsOf(p.id).sort((x,y)=>(y.destacada?1:0)-(x.destacada?1:0)||asc(x,y))})).filter(g=>g.L.length);
+  if(!G.length)return"";
+  const fila=a=>`<div class="pjr ${a.destacada?"hit":""} ${done(a)?"":"pen"}" style="--pc:${P[a.proyecto].color}">
+    <div class="pjs">${badge(a.estado)}${a.vencida?'<span class="flag red">Vencida</span>':""}<small>${done(a)?fmt(a.fecha):(a.fecha?"para "+fmt(a.fecha):"")}</small></div>
+    <div class="pjm"><button class="pjn" data-act="${a.id}">${a.destacada?STAR:""}${esc(a.titulo)}${a.area?`<small>Área: ${esc(a.area)}</small>`:""}</button>${a.contexto?`<p class="pjx">${esc(a.contexto)}</p>`:""}</div>
+    <div class="pje">${a.enlaces.length?a.enlaces.map((e,j)=>lkMini(e,a,j)).join(""):`<span class="nolk">${done(a)?"Sin evidencia":"Evidencia al terminarlo"}</span>`}</div></div>`;
+  return `<h2 class="reveal">Avances por proyecto <small>Cada proyecto con sus actividades y su evidencia. Los hitos (★) van primero.</small></h2>
+  ${G.map(g=>`<section class="pj reveal" style="--pc:${g.p.color}"><div class="pjh"><h3><i></i>${esc(g.p.nombre)}</h3><span class="pjc">${g.L.filter(done).length} de ${g.L.length} realizadas</span></div>
+   ${g.p.objetivo?`<p class="hpc">${esc(g.p.objetivo)}</p>`:""}<div class="pjt">${g.L.map(fila).join("")}</div></section>`).join("")}`;
+}
+function vImportanteViejo(){
+  const desc=(x,y)=>(y.fecha||"").localeCompare(x.fecha||""),asc=(x,y)=>(x.fecha||"9999").localeCompare(y.fecha||"9999");
+  const G=PR.map(p=>({p,L:A.filter(a=>a.proyecto===p.id&&a.destacada).sort(asc)})).filter(g=>g.L.length);
+  if(!G.length){
+    const L=A.filter(done).sort(desc).slice(0,3);if(!L.length)return"";
+    return `<h2 class="reveal">Últimas tareas realizadas <small>Todavía no hay hitos destacados marcados.</small></h2>
+    <div class="mi-grid">${L.map((a,i)=>`<article class="mi reveal" style="--pc:${P[a.proyecto].color};--d:${i*110}ms">
+     <div class="mh"><span class="pchip" style="--pc:${P[a.proyecto].color}"><i></i>${esc(P[a.proyecto].nombre)}</span><span class="date">${fmt(a.fecha)}</span></div>
+     <button class="mt" data-act="${a.id}">${esc(a.titulo)}</button>
+     <div class="fl" style="justify-content:flex-start;padding:0">${a.enlaces.length?a.enlaces.map((e,j)=>lkBtn(e,a,j)).join(""):'<span class="nolk">Sin vínculo todavía</span>'}</div></article>`).join("")}</div>`;
+  }
+  const hito=(a,i)=>`<article class="mi reveal st ${done(a)?"":"cur"}" style="--pc:${P[a.proyecto].color};--d:${i*90}ms">
+   <div class="mh">${done(a)?`<span class="date">${fmt(a.fecha)}</span>`:`<span class="badge ${cls("En ejecución")}">En curso</span>`}</div>
    <button class="mt" data-act="${a.id}">${esc(a.titulo)}</button>
-   <div class="fl" style="justify-content:flex-start;padding:0">${a.enlaces.length?a.enlaces.map((e,j)=>lkBtn(e,a,j)).join(""):'<span class="nolk">Sin vínculo todavía</span>'}</div></article>`).join("")}</div>`;
+   <div class="fl" style="justify-content:flex-start;padding:0">${a.enlaces.length?a.enlaces.map((e,j)=>lkBtn(e,a,j)).join(""):`<span class="nolk">${done(a)?"Sin vínculo todavía":"En curso: la evidencia llega al terminarlo"}</span>`}</div></article>`;
+  return `<h2 class="reveal">Lo más importante del período <small>Los hitos de cada proyecto, con su evidencia.</small></h2>
+  ${G.map(g=>`<section class="hp"><h3 class="hph reveal" style="--pc:${g.p.color}"><i></i>${esc(g.p.nombre)}</h3>${g.p.objetivo?`<p class="hpc reveal">${esc(g.p.objetivo)}</p>`:""}<div class="mi-grid">${g.L.map(hito).join("")}</div></section>`).join("")}`;
 }
 /* Comparación con el período inmediatamente anterior: se cruzan las tareas por su texto (clave). */
 function compareData(){
@@ -501,6 +575,32 @@ function vCompare(){
    <div class="cm"><small>Siguen pendientes</small><b style="color:${c.siguen.length?"var(--amber)":"var(--green)"}"><span data-to="${c.siguen.length}">0</span></b><span>pendientes en ambos períodos</span></div>
   </div><p class="note" style="margin-top:10px">Comparación por el texto de la tarea entre los dos períodos. Fuente: períodos guardados en esta plataforma.</p>`;
 }
+/* Panel de la portada: cada proyecto (en el orden de config.json) con una casilla por actividad: llena = realizada. Sin porcentajes. */
+/* Anillo de la portada: un arco por actividad, agrupado por proyecto (orden de config.json) y con el color del proyecto.
+   Arco lleno = realizada; tenue = pendiente (rojo tenue si está vencida). Centro: realizadas de total. Sin porcentajes. */
+function panelProy(){
+  const G=PR.map(p=>({p,L:actsOf(p.id).sort((x,y)=>(x.fecha||"9999").localeCompare(y.fecha||"9999"))})).filter(g=>g.L.length);
+  const N=G.reduce((s,g)=>s+g.L.length,0);if(!N)return"";
+  const gp=5,gt=1.4,a=(360-G.length*gp-G.reduce((s,g)=>s+g.L.length-1,0)*gt)/N,R=120,C=150;
+  const pt=t=>{const r=(t-90)*Math.PI/180;return[(C+R*Math.cos(r)).toFixed(2),(C+R*Math.sin(r)).toFixed(2)]};
+  let t=gp/2,segs="";
+  G.forEach(g=>{g.L.forEach(x=>{const t2=t+a,[x1,y1]=pt(t),[x2,y2]=pt(t2),ok=done(x);
+    const st=ok?`stroke:${g.p.color}`:`stroke:${x.vencida?"var(--red)":g.p.color};stroke-opacity:.3`;
+    const lb=`${g.p.nombre}: ${x.titulo} (${ok?"realizada":"pendiente"})`;
+    segs+=`<path class="sg" d="M${x1} ${y1}A${R} ${R} 0 0 1 ${x2} ${y2}" style="${st}" data-act="${x.id}" tabindex="0" role="button" aria-label="${esc(lb)}"><title>${esc(lb)}</title></path>`;
+    t=t2+gt});t=t-gt+gp});
+  const d=A.filter(done).length;
+  return `<div class="pp"><div class="rgw"><svg class="rg" viewBox="0 0 300 300" role="group" aria-label="${d} de ${A.length} actividades realizadas, por proyecto">${segs}</svg>
+   <div class="rgc"><b>${d}</b><span>de ${A.length}</span><small>actividades realizadas</small></div></div>
+   <div class="rgl" role="list">${G.map(g=>`<button class="ppr" role="listitem" style="--pc:${g.p.color}" data-go="#proyecto/${g.p.id}"><span class="ppn"><i></i>${esc(g.p.nombre)}</span><span class="ppc"><b>${g.L.filter(done).length}</b> de ${g.L.length}</span></button>`).join("")}</div>
+   <p class="rgn">Cada arco es una actividad, agrupada por proyecto. Lleno = realizada; tenue = pendiente.</p></div>`;
+}
+function panelProyViejo(){
+  return `<div class="pp" role="list" aria-label="Avance por proyecto"><div class="ppt">Avance por proyecto <small>una casilla por actividad · llena = realizada</small></div>
+  ${PR.map(p=>{const L=actsOf(p.id).sort((x,y)=>(x.fecha||"9999").localeCompare(y.fecha||"9999")),d=L.filter(done).length;
+   return `<button class="ppr" role="listitem" style="--pc:${p.color}" data-go="#proyecto/${p.id}"><span class="ppn"><i></i>${esc(p.nombre)}</span><span class="ppc"><b>${d}</b> de ${L.length}</span>
+   <span class="pps" aria-hidden="true">${L.map(a=>`<i class="${done(a)?"f":""} ${a.vencida?"ov":""}" title="${esc(a.titulo)}"></i>`).join("")}</span></button>`}).join("")}</div>`;
+}
 function vResumen(){
   const n=A.length,open=n-nDone,latest=PERIODS[PERIODS.length-1];
   const banner=latest&&sel!==latest.id?`<div class="vb"><span>${sel==="acum"?"Vista acumulada de todos los períodos: cada tarea cuenta una vez, con su último estado.":"Estás viendo un período anterior ("+plabel(DATA)+")."}</span><button class="btn" data-sel="${latest.id}">Ir al período más reciente</button></div>`:"";
@@ -509,7 +609,7 @@ function vResumen(){
     <h1><span class="g">${n} tareas</span> en ${PR.length} proyectos: ${nDone} realizadas, ${open} por cerrar</h1>
     <p class="lead">${esc(DATA.preparado||"")}. Cada tarea tiene su fecha, su proyecto y su vínculo de evidencia; lo realizado se distingue de lo validado.</p>
     <div class="cta"><button class="btn pri" data-go="#realizadas">Ver tareas realizadas</button><button class="btn" data-go="#proyectos">Ver proyectos</button><button class="btn" id="cpbtn" data-copy="1">Copiar resumen</button></div><div id="cpslot"></div></div>
-   <div>${ring()}</div></section>
+   <div>${panelProy()}</div></section>
   ${vImportante()}
   ${sel==="acum"?"":`<h2 class="reveal">Ritmo del período <small>Cada punto es una tarea en su fecha. Haz clic para ver el detalle.</small></h2>${strip()}`}
   ${vCompare()}
@@ -653,7 +753,10 @@ function openPreview(aid,i){
   $("#lbx").focus();
 }
 function closePreview(){const lb=$("#lb");lb.classList.remove("on");lb.innerHTML="";if(lbFocus&&lbFocus.isConnected&&lbFocus.focus)lbFocus.focus();lbFocus=null}
-document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("a[data-prev]");if(a&&e.button===0&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey){e.preventDefault();const[id,i]=a.dataset.prev.split("|");openPreview(id,+i)}});
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("a[data-prev]");if(a&&e.button===0&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey){
+  /* El visor solo se abre si puede mostrar el archivo (guardado en esta página). Un enlace externo (SharePoint, Teams…) no se puede incrustar: se abre directo en pestaña nueva. */
+  const[id,i]=a.dataset.prev.split("|"),ac=A.find(x=>x.id===id),en=ac&&ac.enlaces[+i];
+  if(en&&en.asset===true&&["Imagen","Video","PDF"].includes(en.tipo)){e.preventDefault();openPreview(id,+i)}}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){if($("#lb").classList.contains("on"))closePreview();else closeDrawer()}});
 
 /* ===== partículas suaves del hero ===== */
