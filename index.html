@@ -470,6 +470,33 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 .swseg i.f{background:var(--pc)}
 .sw button[aria-current="true"]{box-shadow:0 0 0 1px var(--pc),0 8px 28px color-mix(in srgb,var(--pc) 22%,transparent)}
 @media(max-width:900px){.swa{max-height:none}.pj2+.pj2{padding-top:36px}.pj2h .cnt{width:100%}}
+@media(max-width:900px){.tabs{margin-left:8px;gap:6px}.tab{padding:8px 13px;font-size:14px;gap:6px}.tab .ic{width:16px;height:16px}}
+/* niveles, leyenda, gerencia, resultado, filtros */
+.badge.n-pend{color:var(--gray);background:var(--pend-bg)}
+.badge.n-hecha{color:var(--green);background:var(--ok-bg)}
+.badge.n-val{color:var(--cyan);background:var(--run-bg);box-shadow:0 0 0 1px color-mix(in srgb,var(--cyan) 50%,transparent)}
+.badge.n-op{color:#04121c;background:linear-gradient(120deg,#ffd166,#ffb547)}
+.badge.n-op::before{background:#04121c}
+.badge.n-sinev{color:var(--amber);background:var(--val-bg);box-shadow:0 0 0 1px color-mix(in srgb,var(--amber) 50%,transparent)}
+.g2{color:var(--green)}
+.ley{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:0 0 22px;font-size:12.5px;color:var(--muted)}
+.ley>span{display:inline-flex;align-items:center;gap:7px}
+.gb{display:grid;gap:10px;margin-bottom:26px}
+.gr{display:grid;grid-template-columns:minmax(0,1fr) 190px 150px;gap:6px 18px;align-items:start;padding:14px 18px;border:1px solid color-mix(in srgb,var(--amber) 40%,var(--line));border-left:3px solid var(--amber);border-radius:14px;background:var(--panel)}
+.gd b{display:block;font-size:15px;line-height:1.3}
+.gd small{display:block;margin-top:4px;color:var(--muted);font-size:12.5px;line-height:1.4}
+.gq small,.gp small{display:block;color:var(--muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.gq span,.gp span{font-size:14px;font-weight:600}
+.gr em,.rs em{color:var(--amber);font-style:normal;font-weight:500}
+@media(max-width:700px){.gr{grid-template-columns:1fr 1fr}.gd{grid-column:1/-1}}
+.rsb{display:grid;gap:5px;margin:0 0 12px;padding:10px 14px;border:1px dashed var(--line2);border-radius:12px;background:rgba(255,255,255,.025)}
+.rs{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;font-size:13px;line-height:1.4}
+.rs small{padding-top:2px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-size:10.5px}
+@media(max-width:520px){.rs{grid-template-columns:1fr;gap:1px}}
+.fb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px}
+.fb .pchip[aria-pressed="true"]{border-color:var(--cyan);background:rgba(34,211,238,.13);color:#fff}
+.pjc{margin:6px 0 0;font-size:12.5px;color:var(--muted)}
+.pjc .sf{color:var(--amber);font-weight:600}
 </style>
 <div class="bg" aria-hidden="true"><i></i><i></i></div>
 <header class="top">
@@ -527,7 +554,12 @@ function applyData(){
   P=Object.fromEntries(PR.map(p=>[p.id,p]));
   A.forEach(a=>{if(!P[a.proyecto])P[a.proyecto]={id:a.proyecto,nombre:a.proyecto,color:"#8091b3",objetivo:""};a.enlaces=a.enlaces||[]});
   A.forEach(a=>{a.vencida=!done(a)&&!!a.fecha&&a.fecha<REF;a.venceHoy=!done(a)&&a.fecha===REF;a.sinFecha=!a.fecha});
+  /* arrastradas: pendientes que ya lo estaban en el período anterior (se cruzan por el texto de la tarea) */
+  A.forEach(a=>{a.arrastra=false});
+  if(sel!=="acum"){const ix=PERIODS.findIndex(p=>p.id===sel),pv=ix>0?PERIODS[ix-1]:null;
+    if(pv){const pend=new Set((pv.actividades||[]).filter(x=>x.estado!=="Completada").map(mkClave));A.forEach(a=>{a.arrastra=!done(a)&&pend.has(a.clave)})}}
   nDone=A.filter(done).length;nEv=A.filter(a=>done(a)&&a.enlaces.length>0).length;
+  calcResumen();
 }
 const by=e=>A.filter(a=>a.estado===e).length;
 const actsOf=pid=>A.filter(a=>a.proyecto===pid);
@@ -602,21 +634,50 @@ function panelProy(){
    <div class="rgl" role="list">${G.map(g=>`<button class="ppr" role="listitem" style="--pc:${g.p.color}" data-go="#proyecto/${g.p.id}"><span class="ppn"><i></i>${esc(g.p.nombre)}</span><span class="ppc"><b>${g.L.filter(done).length}</b> de ${g.L.length}</span></button>`).join("")}</div>
    <p class="rgn">Cada arco es una actividad, agrupada por proyecto. Lleno = realizada; tenue = pendiente.</p></div>`;
 }
+/* ===== niveles de cada tarea: Pendiente · Hecha · Validada · En operación · Hecha, sin evidencia =====
+   Sin enlace de evidencia una tarea hecha nunca figura como validada ni en operación. */
+let nVal=0,nOper=0,nHit=0,nHitOk=0,nSinEv=0,nAt=0,fFil="todo",fResp="";
+const NIVEL={pend:"Pendiente",hecha:"Hecha",val:"Validada",op:"En operación",sinev:"Hecha, sin evidencia"};
+function nivelDe(a){if(!done(a))return"pend";if(!a.enlaces.length)return"sinev";return a.nivel==="operacion"?"op":a.nivel==="validada"?"val":"hecha"}
+const nivelBadge=a=>{const k=nivelDe(a);return `<span class="badge n-${k}">${NIVEL[k]}</span>`};
+const requiereAtencion=a=>!done(a)||a.vencida||nivelDe(a)==="sinev";
+function calcResumen(){
+  nVal=A.filter(a=>["val","op"].includes(nivelDe(a))).length;nOper=A.filter(a=>nivelDe(a)==="op").length;
+  nHit=A.filter(a=>a.destacada).length;nHitOk=A.filter(a=>a.destacada&&done(a)).length;
+  nSinEv=A.filter(a=>nivelDe(a)==="sinev").length;nAt=A.filter(requiereAtencion).length;
+}
 /* ===== filas de tareas (Resumen desplegable y Proyectos): hitos ★ primero, luego por fecha; las pendientes al final ===== */
 const ordenTareas=(x,y)=>(y.destacada?1:0)-(x.destacada?1:0)||(x.fecha||"9999").localeCompare(y.fecha||"9999")||x.fila-y.fila;
 function tareaFila(a){
-  const falta=!done(a)&&a.pendiente?`<p class="pjx fal">${esc(a.pendiente)}</p>`:"";
-  return `<div class="pjr ${a.destacada?"hit":""} ${done(a)?"":"pen"}" style="--pc:${P[a.proyecto].color}">
-    <div class="pjs">${badge(a.estado)}${a.vencida?'<span class="flag red">Vencida</span>':""}<small>${done(a)?fmt(a.fecha):(a.fecha?"para "+fmt(a.fecha):"")}</small></div>
-    <div class="pjm"><button class="pjn" data-act="${a.id}">${a.destacada?STAR:""}${esc(a.titulo)}${a.area?`<small>Área: ${esc(a.area)}</small>`:""}</button>${a.contexto?`<p class="pjx">${esc(a.contexto)}</p>`:""}${falta}</div>
-    <div class="pje">${a.enlaces.length?a.enlaces.map((e,j)=>lkMini(e,a,j)).join(""):`<span class="nolk">${done(a)?"Sin evidencia":"Evidencia al terminarlo"}</span>`}</div></div>`;
+  const pen=!done(a);
+  const fal=pen&&a.pendiente?`<p class="pjx fal">${esc(a.pendiente)}</p>`:"";
+  const comp=pen?`<p class="pjc">Responsable: ${esc(a.responsable||"Ingeniería de Procesos")} · ${a.fecha?(a.vencida?"Vencida desde "+fmt(a.fecha):"Compromiso: "+fmt(a.fecha)):a.compromiso?"Compromiso: "+esc(a.compromiso):'<b class="sf">Sin fecha comprometida</b>'}</p>`:"";
+  return `<div class="pjr ${a.destacada?"hit":""} ${pen?"pen":""}" style="--pc:${P[a.proyecto].color}">
+    <div class="pjs">${nivelBadge(a)}${a.vencida?'<span class="flag red">Vencida</span>':""}${a.venceHoy?'<span class="flag amb">Cierra hoy</span>':""}${a.arrastra?'<span class="flag amb" title="Ya estaba pendiente en el período anterior">Arrastrada</span>':""}<small>${pen?"":fmt(a.fecha)}</small></div>
+    <div class="pjm"><button class="pjn" data-act="${a.id}">${a.destacada?STAR:""}${esc(a.titulo)}${a.area?`<small>Área: ${esc(a.area)}</small>`:""}</button>${a.contexto?`<p class="pjx">${esc(a.contexto)}</p>`:""}${fal}${comp}</div>
+    <div class="pje">${a.enlaces.length?a.enlaces.map((e,j)=>lkMini(e,a,j)).join(""):`<span class="nolk">${pen?"Evidencia al terminarlo":"Sin evidencia"}</span>`}</div></div>`;
 }
+/* Resultado del proyecto: qué cambió, cuánto ahorra y cuándo se mide (tres líneas; lo que falta se marca en ámbar). */
+function resultadoHTML(p){
+  const r=p.resultado;if(!r)return"";
+  const li=(t,v,f)=>`<div class="rs"><small>${t}</small><span>${v?esc(v):`<em>${f}</em>`}</span></div>`;
+  return `<div class="rsb" aria-label="Resultado del proyecto">${li("Qué cambió",r.cambio,"por definir")}${li("Cuánto ahorra",r.ahorro,"sin medición")}${li("Cuándo se mide",r.medicion,"fecha por definir")}</div>`;
+}
+/* Lo que se necesita de la Gerencia: pocas filas (decisión, quién, para cuándo); una firma que frena dos tareas es un solo bloqueo. */
+function bloqueGerencia(){
+  const G=(DATA.gerencia||[]).filter(g=>g&&g.decision);if(!G.length)return"";
+  return `<h2 class="reveal">Lo que necesito de la Gerencia <span class="n">${G.length}</span></h2><div class="gb reveal">${G.map(g=>{
+    const T=(g.frena||[]).map(id=>A.find(a=>a.id===id)).filter(Boolean);
+    return `<div class="gr"><div class="gd"><b>${esc(g.decision)}</b>${T.length?`<small>Afecta ${T.length} tarea${T.length>1?"s":""}: ${T.map(a=>esc(a.titulo)).join(" · ")}</small>`:""}</div>
+     <div class="gq"><small>Quién decide</small><span>${g.quien?esc(g.quien):"<em>por definir</em>"}</span></div><div class="gp"><small>Para cuándo</small><span>${g.para?esc(g.para):"<em>por definir</em>"}</span></div></div>`}).join("")}</div>`;
+}
+const leyenda=()=>`<div class="ley" aria-label="Leyenda"><span><span class="star">★</span> Hito</span><span><span class="badge n-hecha">Hecha</span> entregada</span><span><span class="badge n-val">Validada</span> aprobada por el dueño del proceso</span><span><span class="badge n-op">En operación</span> ya se usa</span><span><span class="badge n-sinev">Hecha, sin evidencia</span> falta el enlace</span></div>`;
 /* Resumen: solo el título de cada proyecto (en el orden de config.json); al desplegarlo se ven las tareas realizadas. */
 function acordeonProy(g){
   const H=g.L.filter(done),pend=g.L.length-H.length;
   return `<details class="ac reveal" name="resumen-proy" style="--pc:${g.p.color}">
    <summary><span class="acn"><i></i>${esc(g.p.nombre)}</span><span class="acc"><b>${H.length}</b> de ${g.L.length}</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-   <div class="acb">${g.p.objetivo?`<p class="hpc">${esc(g.p.objetivo)}</p>`:""}
+   <div class="acb">${g.p.objetivo?`<p class="hpc">${esc(g.p.objetivo)}</p>`:""}${resultadoHTML(g.p)}
     <div class="pjt">${H.length?H.map(tareaFila).join(""):'<div class="empty">Todavía no hay tareas realizadas en este proyecto.</div>'}</div>
     <div class="acf"><span>${pend?pend+" pendiente"+(pend>1?"s":""):"Sin pendientes"}</span><button class="btn" data-go="#proyecto/${g.p.id}">Ver el proyecto →</button></div></div></details>`;
 }
@@ -626,14 +687,16 @@ function vResumen(){
   const G=PR.map(p=>({p,L:actsOf(p.id).sort(ordenTareas)})).filter(g=>g.L.length);
   return `${banner}<section class="hero"><canvas id="fx"></canvas>
    <div><p class="eyebrow">${esc(DATA.etiqueta)} · ${fmt(DATA.desde)} – ${fmt(DATA.hasta)}</p>
-    <h1><span class="g">${n} tareas</span> en ${PR.length} proyectos: ${nDone} realizadas, ${open} por cerrar</h1>
-    <p class="lead">${esc(DATA.preparado||"")}. Cada tarea tiene su fecha, su proyecto y su vínculo de evidencia; lo realizado se distingue de lo validado.</p>
-    <div class="cta"><button class="btn pri" data-go="#proyectos">Ver proyectos</button><button class="btn" id="cpbtn" data-copy="1">Copiar resumen</button></div><div id="cpslot"></div></div>
+    <h1><span class="g">${nDone} realizadas</span> · <span class="g2">${nVal} validadas</span></h1>
+    <p class="lead">${n} tareas en ${PR.length} proyectos · ${open} por cerrar · ${nHitOk} de ${nHit} hitos cerrados${nSinEv?" · "+nSinEv+" sin evidencia":""}. ${esc(DATA.preparado||"")}.</p>
+    <div class="cta"><button class="btn pri" data-go="#proyectos">Ver proyectos</button><button class="btn" data-fil="atencion">Requiere atención (${nAt})</button><button class="btn" id="cpbtn" data-copy="1">Copiar resumen</button></div><div id="cpslot"></div></div>
    <div>${panelProy()}</div></section>
+  ${leyenda()}
+  ${bloqueGerencia()}
   <h2 class="reveal">Proyectos <span class="n">${G.length}</span> <small>Toca un proyecto para ver lo que se realizó.</small></h2>
   <div class="acs">${G.map(acordeonProy).join("")}</div>
   ${vCompare()}
-  <p class="note">No se muestran porcentajes de avance por proyecto: no hay hitos ponderados definidos; se cuenta cuántas actividades están realizadas. «Realizada» no equivale a «validada». Datos de: ${esc(DATA.origen)} · generado el ${esc(DATA.generado)}.</p>`;
+  <p class="note">No se muestran porcentajes de avance por proyecto: no hay hitos ponderados definidos; se cuenta cuántas actividades y cuántos hitos están cerrados. «Hecha» no equivale a «validada»: la validada requiere evidencia. Datos de: ${esc(DATA.origen)} · generado el ${esc(DATA.generado)}.</p>`;
 }
 
 /* ===== historial de períodos ===== */
@@ -658,25 +721,31 @@ function vHistorial(){
 const STAR='<span class="star" title="Hito destacado">★</span> ';
 let spyFn=null;
 /* Proyectos: TODOS los proyectos seguidos, uno tras otro y en el orden de config.json, cada uno con su franja de identificación.
+   Filtros: todo · requiere atención · pendientes · vencidas · sin evidencia (y por responsable si hay más de uno).
    El lateral (en celular, un panel) salta a cada proyecto y resalta el que se está viendo. */
 function vProyectos(pid){
-  const G=PR.map((p,i)=>({p,i,L:actsOf(p.id).sort(ordenTareas)})).filter(g=>g.L.length);
-  if(!G.length)return '<div class="pnl"><div class="empty">Este período todavía no tiene proyectos.</div></div>';
+  const fil=a=>(fFil==="todo"||(fFil==="atencion"&&requiereAtencion(a))||(fFil==="pend"&&!done(a))||(fFil==="venc"&&a.vencida)||(fFil==="sinev"&&nivelDe(a)==="sinev"))&&(!fResp||a.responsable===fResp);
+  const G0=PR.map((p,i)=>({p,i,L:actsOf(p.id).sort(ordenTareas)})).filter(g=>g.L.length);
+  const G=G0.map(g=>({...g,V:g.L.filter(fil)})).filter(g=>g.V.length);
+  const resp=[...new Set(A.map(a=>a.responsable).filter(Boolean))],nV=A.filter(a=>a.vencida).length;
+  const barra=`<div class="fb" role="group" aria-label="Filtrar tareas">${[["todo","Todo"],["atencion","Requiere atención ("+nAt+")"],["pend","Pendientes ("+(A.length-nDone)+")"],["venc","Vencidas ("+nV+")"],["sinev","Sin evidencia ("+nSinEv+")"]].map(([k,l])=>`<button class="pchip" data-fil="${k}" aria-pressed="${fFil===k}"><i></i>${l}</button>`).join("")}${resp.length>1?`<select class="psel" id="fresp" aria-label="Responsable"><option value="">Todos los responsables</option>${resp.map(r=>`<option ${r===fResp?"selected":""}>${esc(r)}</option>`).join("")}</select>`:""}</div>`;
+  if(!G.length)return `<div class="pd">${barra}<div class="pnl"><div class="empty">No hay tareas para este filtro.</div></div></div>`;
   const a0=G.find(g=>g.p.id===pid)||G[0];
   const lista=(T,tit)=>T.length?`<h3 class="pj2s reveal">${tit} <span class="n">${T.length}</span></h3><div class="pjt reveal">${T.map(tareaFila).join("")}</div>`:"";
   const ic=d=>`<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
   const sec=g=>{
-    const H=g.L.filter(done),pend=g.L.filter(a=>!done(a)),ev=g.L.reduce((s,a)=>s+a.enlaces.length,0),ov=g.L.filter(a=>a.vencida).length;
+    const H=g.L.filter(done),ev=g.L.reduce((s,a)=>s+a.enlaces.length,0),ov=g.L.filter(a=>a.vencida).length,pend=g.L.length-H.length;
     return `<section class="pj2" id="p-${g.p.id}" data-pid="${g.p.id}" style="--pc:${g.p.color}">
      <header class="pj2h reveal"><span class="pj2n">${String(g.i+1).padStart(2,"0")}</span><div class="pj2t"><p class="eyebrow">Proyecto ${g.i+1} de ${PR.length}</p><h2>${esc(g.p.nombre)}</h2></div>
-      <div class="cnt"><div><b>${H.length}/${g.L.length}</b>realizadas</div>${pend.length?`<div><b>${pend.length}</b>pendientes</div>`:""}${ov?`<div><b>${ov}</b>vencidas</div>`:""}<div><b>${ev}</b>enlaces</div></div></header>
-     ${g.p.objetivo?`<p class="lead reveal">${esc(g.p.objetivo)}</p>`:""}
-     ${lista(H,"Realizadas")}${lista(pend,"Pendientes")}</section>`};
+      <div class="cnt"><div><b>${H.length}/${g.L.length}</b>realizadas</div>${pend?`<div><b>${pend}</b>pendientes</div>`:""}${ov?`<div><b>${ov}</b>vencidas</div>`:""}<div><b>${ev}</b>enlaces</div></div></header>
+     ${g.p.objetivo?`<p class="lead reveal">${esc(g.p.objetivo)}</p>`:""}${resultadoHTML(g.p)}
+     ${lista(g.V.filter(done),"Realizadas")}${lista(g.V.filter(a=>!done(a)),"Pendientes")}</section>`};
   return `<div class="split" id="spl"><div class="swscrim" data-pick></div>
   <aside class="swa" aria-label="Elegir proyecto"><div class="swh"><b>Proyectos</b><button class="btn" data-pick aria-label="Cerrar">✕</button></div>
    <nav class="sw">${G.map(g=>`<button style="--pc:${g.p.color}" data-jump="${g.p.id}" aria-current="${g.p.id===a0.p.id}"><span class="swn">${g.i+1}</span><span class="swt"><b>${esc(g.p.nombre)}</b><small>${g.L.filter(done).length} de ${g.L.length} realizadas</small><span class="swseg" aria-hidden="true">${g.L.map(a=>`<i class="${done(a)?"f":""}"></i>`).join("")}</span></span></button>`).join("")}</nav></aside>
   <div class="pd">
    <button class="pickbtn" data-pick aria-label="Elegir otro proyecto">${ic('<path d="M4 7h16M4 12h16M4 17h10"/>')}<span id="pkn">${esc(a0.p.nombre)}</span><small id="pkc">${a0.i+1} de ${PR.length}</small>${ic('<path d="M6 9l6 6 6-6"/>')}</button>
+   ${leyenda()}${barra}
    ${G.map(sec).join("")}
   </div></div>`;
 }
@@ -815,6 +884,9 @@ function wire(m){
     b.onmouseenter=on;b.onfocus=on;b.onmouseleave=off;b.onblur=off;b.onclick=()=>{mProy=b.dataset.iso;mEstado=mArea=mQ="";go("#matriz")}});
   m.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>copiarResumen(b));
   m.querySelectorAll("[data-sel]").forEach(b=>b.onclick=()=>{sel=b.dataset.sel;applyData();go("#resumen")});
+  /* filtros de tareas (también desde el botón «Requiere atención» del Resumen) */
+  m.querySelectorAll("[data-fil]").forEach(b=>b.onclick=()=>{fFil=b.dataset.fil;if(route().v==="proyectos")rerender();else go("#proyectos")});
+  const fr=$("#fresp");if(fr)fr.onchange=e=>{fResp=e.target.value;rerender()};
   /* lateral de proyectos: en celular se abre y se cierra como panel */
   m.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{const s=m.querySelector("#spl");if(s)s.classList.toggle("pick")});
   /* resumen: al abrir un proyecto se cierra el que estaba abierto (también lo hace el navegador con name="resumen-proy") */
