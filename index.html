@@ -522,6 +522,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 .rvtoast .ti{font-size:26px}.rvtoast b{display:block}.rvtoast small{color:var(--muted)}
 .rvtoast .rb{border:0;border-radius:999px;padding:8px 14px;font-weight:700;color:#04101c;background:linear-gradient(90deg,var(--cyan),var(--green));white-space:nowrap}
 .rvtoast .x{border:0;background:none;color:var(--muted);font-size:16px;padding:4px}
+.cta .btn.rvgo{display:block;width:100%;text-align:center}
 .btn.rvgo{font-size:1.3em;padding:18px 34px;border-radius:16px;background:linear-gradient(90deg,var(--cyan),var(--green));color:#04101c;border:0;font-weight:800;animation:rvpulse 2.6s ease-in-out infinite}
 .lgd{margin:14px 0}.lgd>summary{cursor:pointer;color:var(--muted);font-size:13px;list-style:none}.lgd>summary::-webkit-details-marker{display:none}.lgd[open]>summary{margin-bottom:8px}
 .rv{position:fixed;inset:0;z-index:60;background:rgba(3,6,12,.94);backdrop-filter:blur(8px);display:grid;place-items:center;padding:14px}
@@ -751,9 +752,9 @@ function vResumen(){
   const G=PR.map(p=>({p,L:actsOf(p.id).sort(ordenTareas)})).filter(g=>g.L.length);
   return `${banner}<section class="hero"><canvas id="fx"></canvas>
    <div><p class="eyebrow">${esc(DATA.etiqueta)} · ${fmt(DATA.desde)} – ${fmt(DATA.hasta)}</p>
-    <h1><span class="g"><span data-to="${nDone}">${nDone}</span> realizadas</span> · <span class="g2"><span data-to="${nVal}">${nVal}</span> validadas</span></h1>
+    <h1><span class="g"><span data-to="${nDone}">${nDone}</span> realizadas</span>${nVal?` · <span class="g2"><span data-to="${nVal}">${nVal}</span> validadas</span>`:""}</h1>
     <p class="lead">🗂️ ${n} tareas · 🧩 ${PR.length} proyectos · ⏳ ${open} por cerrar${nHit?` · ⭐ ${nHitOk} de ${nHit} hitos`:""}${nSinEv?` · 📎 ${nSinEv} sin evidencia`:""}</p>
-    <div class="cta"><button class="btn rvgo" data-film="1">▶ Resumen de lo que se hizo</button><button class="btn pri" data-go="#proyectos">📂 Ver proyectos</button><button class="btn" data-fil="atencion">⚠️ Requiere atención (${nAt})</button><button class="btn" id="cpbtn" data-copy="1">📋 Copiar resumen</button></div><div id="cpslot"></div></div>
+    <div class="cta"><button class="btn rvgo" data-film="1">▶ Resumen de lo que se hizo</button></div><div class="cta"><button class="btn" data-go="#proyectos">📂 Ver proyectos</button></div></div>
    <div>${panelProy()}</div></section>
   <details class="lgd"><summary>ℹ️ ¿Qué significa cada estado?</summary>${leyenda()}</details>
   ${bloqueGerencia()}
