@@ -511,12 +511,58 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 .fb .pchip[aria-pressed="true"]{border-color:var(--cyan);background:rgba(34,211,238,.13);color:#fff}
 .pjc{margin:6px 0 0;font-size:12.5px;color:var(--muted)}
 .pjc .sf{color:var(--amber);font-weight:600}
+/* ===== Resumen en 45 s (modo película) y toques visuales ===== */
+.em{display:inline-grid;place-items:center;width:30px;height:30px;margin-right:10px;border-radius:10px;background:color-mix(in srgb,var(--pc,var(--cyan)) 22%,transparent);font-size:17px;line-height:1;vertical-align:middle}
+.pj2h .em{width:44px;height:44px;font-size:26px;border-radius:14px;margin:0 12px 0 0}
+.rvtop{border:0;border-radius:999px;padding:8px 16px;font-weight:700;color:#04101c;background:linear-gradient(90deg,var(--cyan),var(--green));white-space:nowrap;animation:rvpulse 2.6s ease-in-out infinite}
+@keyframes rvpulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.45)}50%{box-shadow:0 0 0 9px rgba(34,211,238,0)}}
+.rvend{margin:22px 0 0;font:700 clamp(20px,3.6vw,30px)/1.2 var(--disp);color:var(--green)}
+.rvtoast{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;max-width:min(420px,calc(100vw - 36px));padding:12px 14px;border-radius:16px;background:var(--panel-s);border:1px solid var(--cyan);box-shadow:var(--shadow);animation:rvin .5s both}
+.rvtoast.out{opacity:0;transform:translateY(10px);transition:.4s}
+.rvtoast .ti{font-size:26px}.rvtoast b{display:block}.rvtoast small{color:var(--muted)}
+.rvtoast .rb{border:0;border-radius:999px;padding:8px 14px;font-weight:700;color:#04101c;background:linear-gradient(90deg,var(--cyan),var(--green));white-space:nowrap}
+.rvtoast .x{border:0;background:none;color:var(--muted);font-size:16px;padding:4px}
+.btn.rvgo{font-size:1.3em;padding:18px 34px;border-radius:16px;background:linear-gradient(90deg,var(--cyan),var(--green));color:#04101c;border:0;font-weight:800;animation:rvpulse 2.6s ease-in-out infinite}
+.lgd{margin:14px 0}.lgd>summary{cursor:pointer;color:var(--muted);font-size:13px;list-style:none}.lgd>summary::-webkit-details-marker{display:none}.lgd[open]>summary{margin-bottom:8px}
+.rv{position:fixed;inset:0;z-index:60;background:rgba(3,6,12,.94);backdrop-filter:blur(8px);display:grid;place-items:center;padding:14px}
+.rv[hidden]{display:none}
+.rvc{width:min(940px,100%);background:var(--panel-s);border:1px solid var(--line2);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;max-height:calc(100vh - 28px)}
+.rvp{height:5px;background:var(--panel)}.rvp i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .15s linear}
+.rvs{padding:clamp(18px,4vw,40px);min-height:min(54vh,430px);overflow:auto;animation:rvin .55s both}
+@keyframes rvin{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.rvk{color:var(--cyan);font-weight:700;font-size:13px;letter-spacing:.07em;text-transform:uppercase;margin:0 0 10px}
+.rvh{font:700 clamp(24px,4.6vw,40px)/1.12 var(--disp);margin:0 0 8px}
+.rvsub{color:var(--muted);font-size:clamp(16px,2.4vw,22px);margin:0 0 18px}
+.rv1{display:flex;align-items:center;gap:clamp(18px,5vw,48px);flex-wrap:wrap}
+.rvbig{font:800 clamp(60px,14vw,120px)/1 var(--disp);background:linear-gradient(90deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
+.rvbig small{font-size:.32em;color:var(--muted);-webkit-text-fill-color:var(--muted)}
+.rvl{font-size:clamp(17px,2.6vw,24px);margin:6px 0 0}
+.rvring{width:clamp(130px,26vw,200px);height:auto}.rvring circle{transition:stroke-dashoffset 1.3s cubic-bezier(.2,.8,.2,1)}
+.rvt{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:6px}
+.rvt div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 8px;text-align:center;animation:rvin .5s both}
+.rvt div:nth-child(2){animation-delay:.08s}.rvt div:nth-child(3){animation-delay:.16s}.rvt div:nth-child(4){animation-delay:.24s}.rvt div:nth-child(5){animation-delay:.32s}.rvt div:nth-child(6){animation-delay:.4s}
+.rvt i{font-style:normal;font-size:30px;display:block}.rvt b{display:block;font:800 clamp(30px,6vw,44px)/1.1 var(--disp)}.rvt span{font-size:13px;color:var(--muted)}
+.rvr{display:flex;align-items:center;gap:12px;margin:10px 0;font-size:clamp(13px,2vw,16px)}.rvr .n{flex:0 0 min(260px,38%)}
+.rvr .tr{flex:1;height:16px;background:var(--panel);border-radius:9px;overflow:hidden}.rvr .f{display:block;height:100%;width:0;border-radius:9px;background:var(--pc,var(--cyan));transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.rvd{display:flex;align-items:flex-end;gap:clamp(4px,1.2vw,10px);height:170px;margin-top:26px}
+.rvd div{flex:1;border-radius:6px 6px 0 0;background:var(--blue);height:0;position:relative;transition:height 1s cubic-bezier(.2,.8,.2,1)}
+.rvd div.pk{background:linear-gradient(180deg,var(--green),var(--cyan))}.rvd div em{position:absolute;top:-22px;left:0;right:0;text-align:center;font-style:normal;font-weight:700;font-size:14px}
+.rvdl{display:flex;gap:clamp(4px,1.2vw,10px);margin-top:6px;font-size:12px;color:var(--muted)}.rvdl span{flex:1;text-align:center}
+.rvch{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}.rvch span{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--run-bg);border:1px solid var(--line2);font-size:clamp(14px,2vw,17px);animation:rvin .5s both}
+.rvch b{background:var(--bg);border-radius:999px;padding:1px 10px;font-size:.9em;color:var(--green)}
+.rvcap{display:flex;gap:12px;align-items:center;min-height:62px;padding:12px 20px;background:var(--panel);border-top:1px solid var(--line);font-size:clamp(14px,2vw,17px)}
+.rvcap i{font-style:normal;font-size:22px}
+.rvct{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;border-top:1px solid var(--line)}
+.rvct .dts{display:flex;gap:8px}.rvct .dt{width:10px;height:10px;border-radius:50%;border:1px solid var(--line2);background:none;padding:0}.rvct .dt.on{background:var(--cyan);border-color:var(--cyan)}
+.rvct .bs{display:flex;gap:8px;flex-wrap:wrap}.rvct button.rb{border:1px solid var(--line2);background:var(--panel);border-radius:999px;padding:8px 14px;font-weight:600}
+@media (prefers-reduced-motion:reduce){.rvs,.rvt div,.rvch span,.rvtop,.btn.rvgo{animation:none}.rvring circle,.rvr .f,.rvd div{transition:none}}
 </style>
 <div class="bg" aria-hidden="true"><i></i><i></i></div>
 <header class="top">
   <div class="brand"><div class="logo"><b>CA</b></div><span id="ttl">Centro de Avances</span></div>
   <nav class="tabs" id="tabs" aria-label="Secciones"></nav>
   <div class="sp"></div>
+  <button class="rvtop" data-film="1" aria-label="Ver el resumen de lo que se hizo">▶ Resumen de lo que se hizo</button>
   <select class="psel" id="persel" aria-label="Período" hidden></select>
 </header>
 <main id="main"></main>
@@ -524,6 +570,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Detalle de la tarea"></aside>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Vista previa de la evidencia"></div>
+<div class="rv" id="rv" role="dialog" aria-modal="true" aria-label="Resumen de lo que se hizo" hidden></div>
 
 <script>
 /* Los datos viven en la base de datos de esta página (colección «periodos», un documento por período).
@@ -582,6 +629,9 @@ const withEv=a=>a.enlaces.length>0;
 const evBest=a=>!a.enlaces.length?"sin_evidencia":(a.enlaces.some(e=>e.verif==="verificada")?"verificada":"sin_comprobar");
 const ICON={Imagen:'<path d="M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4"/>',Video:'<path d="M4 6h12v12H4zM16 10l5-3v10l-5-3"/>',PDF:'<path d="M6 3h9l4 4v14H6zM14 3v5h5"/>',Excel:'<path d="M4 4h16v16H4zM4 10h16M10 4v16"/>',Word:'<path d="M6 3h9l4 4v14H6zM9 12h7M9 16h7"/>',Presentacion:'<path d="M3 4h18v12H3zM12 16v4M8 20h8"/>',Visio:'<path d="M5 5h6v5H5zM13 14h6v5h-6zM8 10v4h5"/>',"Plataforma web":'<path d="M3 5h18v14H3zM3 9h18"/>',SharePoint:'<path d="M3 7h7l2 2h9v10H3z"/>',Teams:'<path d="M4 6h16v10H9l-5 4z"/>',Enlace:'<path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/>'};
 const ico=t=>`<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[t]||ICON.Enlace}</svg>`;
+/* emoji por proyecto (config.proyectos[].icono lo reemplaza) */
+const EMO={tesor:"💰",bot:"🤖",comex:"🚢",abast:"📦",id:"🧪",pol:"📜",prog:"🏭",logi:"🚚",auto:"🛒",feria:"🎪",rrhh:"🧭",com:"📈",td:"💻"};
+const emo=p=>`<span class="em" aria-hidden="true">${p&&p.icono?esc(p.icono):(p&&EMO[p.id])||"📌"}</span>`;
 let mEstado="",mProy="",mArea="",mQ="",lastFocus=null,stopFx=null,lbFocus=null;
 
 /* ===== resumen ===== */
@@ -690,7 +740,7 @@ const leyenda=()=>`<div class="ley" aria-label="Leyenda"><span><span class="star
 function acordeonProy(g){
   const H=g.L.filter(done),pend=g.L.length-H.length;
   return `<details class="ac reveal" name="resumen-proy" style="--pc:${g.p.color}">
-   <summary><span class="acn"><i></i>${esc(g.p.nombre)}</span><span class="acc"><b>${H.length}</b> de ${g.L.length}</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+   <summary><span class="acn"><i></i>${emo(g.p)}${esc(g.p.nombre)}</span><span class="acc"><b>${H.length}</b> de ${g.L.length}</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
    <div class="acb">${g.p.objetivo?`<p class="hpc">${esc(g.p.objetivo)}</p>`:""}${resultadoHTML(g.p)}
     <div class="pjt">${H.length?H.map(tareaFila).join(""):'<div class="empty">Todavía no hay tareas realizadas en este proyecto.</div>'}</div>
     <div class="acf"><span>${pend?pend+" pendiente"+(pend>1?"s":""):"Sin pendientes"}</span><button class="btn" data-go="#proyecto/${g.p.id}">Ver el proyecto →</button></div></div></details>`;
@@ -702,15 +752,15 @@ function vResumen(){
   return `${banner}<section class="hero"><canvas id="fx"></canvas>
    <div><p class="eyebrow">${esc(DATA.etiqueta)} · ${fmt(DATA.desde)} – ${fmt(DATA.hasta)}</p>
     <h1><span class="g"><span data-to="${nDone}">${nDone}</span> realizadas</span> · <span class="g2"><span data-to="${nVal}">${nVal}</span> validadas</span></h1>
-    <p class="lead">${n} tareas en ${PR.length} proyectos · ${open} por cerrar · ${nHitOk} de ${nHit} hitos cerrados${nSinEv?" · "+nSinEv+" sin evidencia":""}. ${esc(DATA.preparado||"")}.</p>
-    <div class="cta"><button class="btn pri" data-go="#proyectos">Ver proyectos</button><button class="btn" data-fil="atencion">Requiere atención (${nAt})</button><button class="btn" id="cpbtn" data-copy="1">Copiar resumen</button></div><div id="cpslot"></div></div>
+    <p class="lead">🗂️ ${n} tareas · 🧩 ${PR.length} proyectos · ⏳ ${open} por cerrar${nHit?` · ⭐ ${nHitOk} de ${nHit} hitos`:""}${nSinEv?` · 📎 ${nSinEv} sin evidencia`:""}</p>
+    <div class="cta"><button class="btn rvgo" data-film="1">▶ Resumen de lo que se hizo</button><button class="btn pri" data-go="#proyectos">📂 Ver proyectos</button><button class="btn" data-fil="atencion">⚠️ Requiere atención (${nAt})</button><button class="btn" id="cpbtn" data-copy="1">📋 Copiar resumen</button></div><div id="cpslot"></div></div>
    <div>${panelProy()}</div></section>
-  ${leyenda()}
+  <details class="lgd"><summary>ℹ️ ¿Qué significa cada estado?</summary>${leyenda()}</details>
   ${bloqueGerencia()}
   <h2 class="reveal">Proyectos <span class="n">${G.length}</span> <small>Toca un proyecto para ver lo que se realizó.</small></h2>
   <div class="acs">${G.map(acordeonProy).join("")}</div>
   ${vCompare()}
-  <p class="note">No se muestran porcentajes de avance por proyecto: no hay hitos ponderados definidos; se cuenta cuántas actividades y cuántos hitos están cerrados. «Hecha» no equivale a «validada»: la validada requiere evidencia. Datos de: ${esc(DATA.origen)} · generado el ${esc(DATA.generado)}.</p>`;
+  <details class="lgd"><summary>📝 Notas</summary><p class="note">No se muestran porcentajes de avance por proyecto: no hay hitos ponderados definidos; se cuenta cuántas actividades y cuántos hitos están cerrados. «Hecha» no equivale a «validada»: la validada requiere evidencia. Datos de: ${esc(DATA.origen)} · generado el ${esc(DATA.generado)}.</p></details>`;
 }
 
 /* ===== historial de períodos ===== */
@@ -750,7 +800,7 @@ function vProyectos(pid){
   const sec=g=>{
     const H=g.L.filter(done),ev=g.L.reduce((s,a)=>s+a.enlaces.length,0),ov=g.L.filter(a=>a.vencida).length,pend=g.L.length-H.length;
     return `<section class="pj2" id="p-${g.p.id}" data-pid="${g.p.id}" style="--pc:${g.p.color}">
-     <header class="pj2h reveal"><span class="pj2n">${String(g.i+1).padStart(2,"0")}</span><div class="pj2t"><p class="eyebrow">Proyecto ${g.i+1} de ${PR.length}</p><h2>${esc(g.p.nombre)}</h2></div>
+     <header class="pj2h reveal"><span class="pj2n">${String(g.i+1).padStart(2,"0")}</span><div class="pj2t"><p class="eyebrow">Proyecto ${g.i+1} de ${PR.length}</p><h2>${emo(g.p)}${esc(g.p.nombre)}</h2></div>
       <div class="cnt"><div><b>${H.length}/${g.L.length}</b>realizadas</div>${pend?`<div><b>${pend}</b>pendientes</div>`:""}${ov?`<div><b>${ov}</b>vencidas</div>`:""}<div><b>${ev}</b>enlaces</div></div></header>
      ${g.p.objetivo?`<p class="lead reveal">${esc(g.p.objetivo)}</p>`:""}${resultadoHTML(g.p)}
      ${lista(g.V.filter(done),"Realizadas")}${lista(g.V.filter(a=>!done(a)),"Pendientes")}</section>`};
@@ -973,6 +1023,105 @@ const fallback=()=>{if(!SNAPSHOT.length){dbState="nodb";render(true)}};
       dbState="ok";applyData();render(true);
     },e=>{if(!SNAPSHOT.length){dbState=e&&e.code==="revoked"?"nodb":"error"}render(true)});
   }catch(e){if(!SNAPSHOT.length)dbState="error";render(true)}
+})();
+</script>
+<script>
+/* ===== Resumen en 45 s: escenas que avanzan solas, con voz y subtítulos =====
+   Lee DATA.resumen (opcional): {titulo, narracion:[5 textos], audio:[5 rutas .wav/.mp3], entregados:[{e,n,t}]}.
+   Si hay audio del período suena ese (voz de Gemini); si no, la voz del navegador; si tampoco, solo subtítulos. */
+(function(){
+const N_SC=5;let FS=null;
+const R=()=>DATA.resumen||{};
+const TC=s=>String(s).toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()).replace(/\b(Comex|Rrhh|Ssa|Ti)\b/g,x=>x.toUpperCase())
+ .replace(/Logistica/g,"Logística").replace(/Programacion De La Produccion/g,"Programación de la Producción").replace(/Transformacion/g,"Transformación").replace(/\bY\b/g,"y").replace(/\bDe\b/g,"de");
+function datos(){
+  const n=A.length,H=A.filter(done),days={};
+  H.forEach(a=>{if(a.fecha)days[a.fecha]=(days[a.fecha]||0)+1});
+  const dk=Object.keys(days).sort(),peak=dk.reduce((b,k)=>days[k]>(days[b]||0)?k:b,dk[0]);
+  const projs=PR.map(p=>({p,t:actsOf(p.id).length,h:actsOf(p.id).filter(done).length})).filter(x=>x.t).sort((x,y)=>y.t-x.t);
+  const ar={};A.forEach(a=>String(a.area||"").split(",").map(s=>s.trim()).filter(s=>s&&!/^(ok|otros|por completar)$/i.test(s)).forEach(s=>{const k=s.toLowerCase();(ar[k]=ar[k]||{t:TC(s),n:0}).n++}));
+  const areas=Object.values(ar).sort((x,y)=>y.n-x.n);
+  return{n,H:H.length,days,dk,peak,projs,areas};
+}
+function narr(d){
+  const r=R().narracion;if(r&&r.length>=N_SC)return r;
+  const rg=DATA.desde?`del ${fmt(DATA.desde)} al ${fmt(DATA.hasta)}`:"";
+  return[`En estos quince días, ${rg}, Gestión completó ${d.H} de ${d.n} actividades.`,
+   R().entregados?"Entregamos "+R().entregados.slice(0,4).map(x=>x.n+" "+x.t).join(", ")+" y más.":"Mira lo que se entregó.",
+   `Se trabajó en ${d.projs.length} proyectos. ${d.projs[0]?d.projs[0].p.nombre+" lidera con "+d.projs[0].h+" de "+d.projs[0].t+".":""}`,
+   d.peak?`El pico fue el ${fmt(d.peak)}: ${d.days[d.peak]} actividades terminadas en un solo día.`:"El trabajo avanzó día a día.",
+   `Servimos a ${d.areas.length} áreas de la empresa.`];
+}
+function escena(i,d){
+  const r=R(),rg=DATA.desde?`Del ${fmt(DATA.desde)} al ${fmt(DATA.hasta)}`:"";
+  if(i===0){const pct=d.n?d.H/d.n:0;return`<p class="rvk">🎉 Resumen de lo que hizo Gestión en estos 15 días</p><h2 class="rvh">${esc(r.titulo||rg)}</h2>
+   <div class="rv1"><svg class="rvring" viewBox="0 0 170 170" role="img" aria-label="${d.H} de ${d.n} realizadas"><circle cx="85" cy="85" r="70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="16"/><circle id="rvr0" data-off="${(440*(1-pct)).toFixed(1)}" cx="85" cy="85" r="70" fill="none" stroke="var(--green)" stroke-width="16" stroke-linecap="round" stroke-dasharray="440" stroke-dashoffset="440" transform="rotate(-90 85 85)"/><text x="85" y="100" text-anchor="middle" font-size="44">🏆</text></svg>
+   <div><p class="rvbig"><span data-c="${d.H}">0</span> <small>de ${d.n}</small></p><p class="rvl">actividades realizadas ✅</p><p class="rvsub">en ${d.projs.length} proyectos 🚀</p></div></div>`}
+  if(i===1){const E=r.entregados||[];return`<p class="rvk">📦 Lo que se entregó</p><h2 class="rvh">Entregables de la quincena</h2><div class="rvt">${E.map(x=>`<div><i>${esc(x.e)}</i><b data-c="${+x.n}">0</b><span>${esc(x.t)}</span></div>`).join("")}</div>${r.nota?`<p class="rvsub" style="font-size:13px;margin-top:14px">${esc(r.nota)}</p>`:""}`}
+  if(i===2){const top=d.projs.slice(0,6),max=top[0]?top[0].t:1;return`<p class="rvk">🎯 Dónde se trabajó</p><h2 class="rvh">${d.projs.length} proyectos en marcha</h2>${top.map(x=>`<div class="rvr" style="--pc:${x.p.color||"var(--cyan)"}"><span class="n">${emo(x.p)}${esc(x.p.nombre)}</span><span class="tr"><span class="f" data-w="${Math.round(x.t/max*100)}"></span></span><b>${x.h} de ${x.t}</b></div>`).join("")}${d.projs.length>6?`<p class="rvsub" style="font-size:14px">y ${d.projs.length-6} proyectos más</p>`:""}`}
+  if(i===3){const mx=Math.max(1,...d.dk.map(k=>d.days[k]));return`<p class="rvk">📈 Ritmo de los 15 días</p><h2 class="rvh">${d.peak?`El pico: ${fmt(d.peak)} ⚡`:"Trabajo día a día"}</h2><div class="rvd">${d.dk.map(k=>`<div class="${k===d.peak?"pk":""}" data-h="${Math.round(d.days[k]/mx*100)}"><em>${d.days[k]}</em></div>`).join("")}</div><div class="rvdl">${d.dk.map(k=>`<span>${+k.slice(8)}</span>`).join("")}</div>`}
+  return`<p class="rvk">🤝 A quién se le sirvió</p><h2 class="rvh">${d.areas.length} áreas atendidas</h2><div class="rvch">${d.areas.map((a,j)=>`<span style="animation-delay:${j*.07}s">${esc(a.t)} <b>${a.n}</b></span>`).join("")}</div><p class="rvend">🚀 Gestión de Procesos sigue avanzando</p>`;
+}
+function animar(root){
+  root.querySelectorAll("[data-c]").forEach(el=>{const to=+el.dataset.c;if(RM){el.textContent=to;return}let s=0;const st=setInterval(()=>{s+=Math.max(1,Math.ceil(to/22));if(s>=to){s=to;clearInterval(st)}el.textContent=s},38)});
+  setTimeout(()=>{const o=root.querySelector("#rvr0");if(o)o.style.strokeDashoffset=o.dataset.off;root.querySelectorAll("[data-w]").forEach(f=>f.style.width=f.dataset.w+"%");root.querySelectorAll("[data-h]").forEach(f=>f.style.height=f.dataset.h+"%")},80);
+}
+function voz(){try{const v=speechSynthesis.getVoices().filter(x=>/^es/i.test(x.lang));return v.find(x=>/sabina|helena|elena|dalia|paulina|monica|laura|salome|female|mujer/i.test(x.name))||v.find(x=>/google/i.test(x.name))||v[0]}catch(e){return null}}
+function parar(){if(!FS)return;clearTimeout(FS.timer);if(FS.audio){FS.audio.onended=FS.audio.onerror=null;try{FS.audio.pause()}catch(e){}FS.audio=null}try{speechSynthesis.cancel()}catch(e){}}
+function ir(i){
+  const rv=$("#rv"),d=FS.d;parar();FS.i=i;FS.t0=Date.now();FS.dur=9000;
+  rv.querySelector(".rvs").outerHTML=`<div class="rvs" id="rvs">${escena(i,d)}</div>`;animar(rv);
+  rv.querySelector("#rvcap").innerHTML=`<i>${FS.voz?"🔊":"💬"}</i><span>${esc(FS.txt[i])}</span>`;
+  rv.querySelectorAll(".dt").forEach((b,k)=>b.classList.toggle("on",k===i));
+  const sig=()=>{if(FS.i!==i||FS.paused)return;FS.timer=setTimeout(()=>{if(i<N_SC-1)ir(i+1);else fin()},800)};
+  const sub=()=>{FS.timer=setTimeout(sig,9500)};
+  const au=(R().audio||[])[i];
+  if(FS.voz&&au){const a=new Audio(au);FS.audio=a;a.onloadedmetadata=()=>{FS.dur=a.duration*1000};a.onended=sig;a.onerror=()=>{FS.audio=null;habla(i,sig,sub)};a.play().catch(()=>{FS.audio=null;habla(i,sig,sub)})}
+  else if(FS.voz)habla(i,sig,sub);else sub();
+}
+function habla(i,sig,sub){
+  /* la voz del navegador suena robótica: solo se usa si el período lo pide (resumen.vozNavegador); sin audio quedan los subtítulos */
+  if(!R().vozNavegador||!("speechSynthesis" in window)||!FS||FS.i!==i){if(FS&&FS.i===i)sub();return}
+  const v=voz();if(!v){sub();return}
+  const u=new SpeechSynthesisUtterance(FS.txt[i]);u.voice=v;u.lang=v.lang;u.rate=1.05;u.pitch=1.2;u.onend=sig;u.onerror=sub;
+  try{speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){sub()}
+}
+function fin(){FS.paused=true;const b=$("#rv #rvpp");if(b)b.textContent="▶ Ver otra vez"}
+function pintaBarra(){if(!FS)return;const f=FS.audio&&FS.audio.duration?FS.audio.currentTime/FS.audio.duration:Math.min(1,(Date.now()-FS.t0)/FS.dur);const b=$("#rv .rvp i");if(b)b.style.width=Math.min(100,(FS.i+f)/N_SC*100)+"%"}
+function abrir(){
+  if(!A.length)return;
+  const rv=$("#rv"),d=datos();
+  const hayVoz=!!((R().audio||[]).length||R().vozNavegador);
+  FS={i:0,d,txt:narr(d),voz:hayVoz,hayVoz,paused:false,audio:null,timer:null,t0:0,dur:9000,iv:setInterval(pintaBarra,120)};
+  rv.hidden=false;document.body.style.overflow="hidden";
+  rv.innerHTML=`<div class="rvc"><div class="rvp"><i></i></div><div class="rvs" id="rvs"></div><div class="rvcap" id="rvcap"></div>
+   <div class="rvct"><span class="dts">${Array.from({length:N_SC},(_,k)=>`<button class="dt" aria-label="Escena ${k+1}" data-sc="${k}"></button>`).join("")}</span>
+   <span class="bs"><button class="rb" id="rvpp">⏸ Pausa</button>${hayVoz?'<button class="rb" id="rvvz">🔊 Voz: sí</button>':""}<button class="rb" id="rvcl">✕ Cerrar</button></span></div></div>`;
+  rv.querySelectorAll("[data-sc]").forEach(b=>b.onclick=()=>{FS.paused=false;$("#rvpp").textContent="⏸ Pausa";ir(+b.dataset.sc)});
+  $("#rvpp").onclick=()=>{
+    if(FS.paused){FS.paused=false;$("#rvpp").textContent="⏸ Pausa";ir(FS.i>=N_SC-1&&!FS.audio&&Date.now()-FS.t0>FS.dur?0:FS.i)}
+    else{FS.paused=true;parar();$("#rvpp").textContent="▶ Seguir"}};
+  const vz=$("#rvvz");if(vz)vz.onclick=()=>{FS.voz=!FS.voz;vz.textContent=FS.voz?"🔊 Voz: sí":"🔇 Voz: no";ir(FS.i)};
+  $("#rvcl").onclick=cerrar;
+  ir(0);
+}
+function cerrar(){if(!FS)return;parar();clearInterval(FS.iv);FS=null;const rv=$("#rv");rv.hidden=true;rv.innerHTML="";document.body.style.overflow=""}
+document.addEventListener("click",e=>{if(e.target.closest("[data-film]")){const t=$("#rvtoast");if(t)t.remove();abrir()}});
+/* aviso al entrar: el resumen existe y trae audio (una vez por sesión; se cierra solo) */
+function aviso(){
+  try{if(sessionStorage.getItem("rvaviso"))return}catch(e){}
+  if($("#rvtoast"))return;
+  const au=!!(R().audio||[]).length,t=document.createElement("div");t.id="rvtoast";t.className="rvtoast";t.setAttribute("role","status");
+  t.innerHTML=`<span class="ti">${au?"🔊":"🎬"}</span><div><b>Resumen de lo que se hizo</b><small>${au?"Con audio · ":""}45 segundos</small></div><button class="rb" data-film="1">▶ ${au?"Ver y escuchar":"Ver"}</button><button class="x" aria-label="Cerrar aviso">✕</button>`;
+  document.body.appendChild(t);
+  const quita=()=>{t.classList.add("out");setTimeout(()=>t.remove(),400)};
+  t.querySelector(".x").onclick=quita;setTimeout(quita,16000);
+  try{sessionStorage.setItem("rvaviso","1")}catch(e){}
+}
+let tries=0;const iv=setInterval(()=>{tries++;if(A.length&&DATA.resumen&&!FS){clearInterval(iv);aviso()}else if(tries>40)clearInterval(iv)},500);
+document.addEventListener("keydown",e=>{if(FS&&e.key==="Escape")cerrar()});
+try{speechSynthesis.getVoices()}catch(e){}
+window.__film={abrir,cerrar};
 })();
 </script>
 </body></html>
