@@ -523,6 +523,9 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 .rvtoast .rb{border:0;border-radius:999px;padding:8px 14px;font-weight:700;color:#04101c;background:linear-gradient(90deg,var(--cyan),var(--green));white-space:nowrap}
 .rvtoast .x{border:0;background:none;color:var(--muted);font-size:16px;padding:4px}
 .cta .btn.rvgo{display:block;width:100%;text-align:center}
+.pers{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px;color:var(--muted);font-size:14px}
+.pers .chip{border:1px solid var(--line2);background:var(--panel);border-radius:999px;padding:6px 14px;font-weight:600;color:var(--text)}
+.pers .chip[aria-current="true"]{background:var(--run-bg);border-color:var(--cyan);color:var(--cyan)}
 .btn.rvgo{font-size:1.3em;padding:18px 34px;border-radius:16px;background:linear-gradient(90deg,var(--cyan),var(--green));color:#04101c;border:0;font-weight:800;animation:rvpulse 2.6s ease-in-out infinite}
 .lgd{margin:14px 0}.lgd>summary{cursor:pointer;color:var(--muted);font-size:13px;list-style:none}.lgd>summary::-webkit-details-marker{display:none}.lgd[open]>summary{margin-bottom:8px}
 .rv{position:fixed;inset:0;z-index:60;background:rgba(3,6,12,.94);backdrop-filter:blur(8px);display:grid;place-items:center;padding:14px}
@@ -723,8 +726,9 @@ function tareaFila(a){
     <div class="pje">${a.enlaces.length?a.enlaces.map((e,j)=>lkMini(e,a,j)).join(""):`<span class="nolk">${pen?"Evidencia al terminarlo":"Sin evidencia"}</span>`}</div></div>`;
 }
 /* Resultado del proyecto: qué cambió, cuánto ahorra y cuándo se mide (tres líneas; lo que falta se marca en ámbar). */
+const SHOW_RESULT=false; /* «Qué cambió / Cuánto ahorra / Cuándo se mide» oculto hasta tener mediciones reales (pedido de Alejandro 06/11) */
 function resultadoHTML(p){
-  const r=p.resultado;if(!r)return"";
+  const r=SHOW_RESULT?p.resultado:null;if(!r)return"";
   const li=(t,v,f)=>`<div class="rs"><small>${t}</small><span>${v?esc(v):`<em>${f}</em>`}</span></div>`;
   return `<div class="rsb" aria-label="Resultado del proyecto">${li("Qué cambió",r.cambio,"por definir")}${li("Cuánto ahorra",r.ahorro,"sin medición")}${li("Cuándo se mide",r.medicion,"fecha por definir")}</div>`;
 }
@@ -754,7 +758,8 @@ function vResumen(){
    <div><p class="eyebrow">${esc(DATA.etiqueta)} · ${fmt(DATA.desde)} – ${fmt(DATA.hasta)}</p>
     <h1><span class="g"><span data-to="${nDone}">${nDone}</span> realizadas</span>${nVal?` · <span class="g2"><span data-to="${nVal}">${nVal}</span> validadas</span>`:""}</h1>
     <p class="lead">🗂️ ${n} tareas · 🧩 ${PR.length} proyectos · ⏳ ${open} por cerrar${nHit?` · ⭐ ${nHitOk} de ${nHit} hitos`:""}${nSinEv?` · 📎 ${nSinEv} sin evidencia`:""}</p>
-    <div class="cta"><button class="btn rvgo" data-film="1">▶ Resumen de lo que se hizo</button></div><div class="cta"><button class="btn" data-go="#proyectos">📂 Ver proyectos</button></div></div>
+    <div class="cta"><button class="btn rvgo" data-film="1">▶ Resumen de lo que se hizo</button></div><div class="cta"><button class="btn" data-go="#proyectos">📂 Ver proyectos</button></div>
+    <div class="pers" aria-label="Períodos">📅 Períodos: ${PERIODS.slice().reverse().map(p=>`<button class="chip" data-sel="${esc(p.id)}" aria-current="${p.id===sel}">${plabel(p)}</button>`).join("")}<button class="chip" data-sel="acum" aria-current="${sel==="acum"}">Todos juntos</button></div></div>
    <div>${panelProy()}</div></section>
   <details class="lgd"><summary>ℹ️ ¿Qué significa cada estado?</summary>${leyenda()}</details>
   ${bloqueGerencia()}
